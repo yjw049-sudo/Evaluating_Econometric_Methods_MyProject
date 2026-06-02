@@ -18,7 +18,7 @@ EXTRA_STOP = {'canada', 'hon', 'member', 'question', 'ask'}
 
 def load_speeches(year: int, month: int,step: int) -> pd.DataFrame:
     """Load one Speeches{year}_{step}.xlsx file, dedupe, filter by length."""
-    path = DATA_DIR / 'input' / str(year) / str(month) / f'{year}-{month}-{step}.csv'
+    path = DATA_DIR / 'input' / 'lipad' / str(year) / str(month) / f'{year}-{month}-{step}.csv'
     df = (pd.read_csv(path)
             .dropna(subset=['speakername', 'speechtext'])
             .drop_duplicates(subset='speechtext'))
@@ -49,14 +49,18 @@ def preprocess(year: int, month: int, step: int, extra_stop: set = EXTRA_STOP) -
 
 if __name__ == '__main__':
     beg = time.time()
-    for year in range(1901, 2019):
+    for year in range(1901, 2020):
         for month in range(1, 13):
-            for step in range(0, 40):
-                path = DATA_DIR / 'input' / str(year) / str(month) / f'{year}-{month}-{step}.csv'
-                if not path.exists():
-                    print(f"File not found: {path}")
+            for step in range(1, 32):
+                path1 = DATA_DIR / 'input' / 'lipad' / str(year) / str(month) / f'{year}-{month}-{step}.csv'
+                path2 = DATA_DIR / 'output' / 'processed_data' / f'{year}-{month}-{step}.csv'
+                if not path1.exists():
+                    print(f"File not found: {year}-{month}-{step}.csv")
+                    continue
+                if path2.exists():
+                    print(f"Already processed: {year}-{month}-{step}.csv")
                     continue
                 df = preprocess(year, month, step)
-                df.to_csv(DATA_DIR / 'output' / 'processed_data' / f'{year}-{month}-{step}.csv', index=False, sep=';')
+                df.to_csv(path2, index=False, sep=';')
     end = time.time()
-    print("Duration of 
+    print("Duration of Preparation: "+str('{:8.2f}'.format(end-beg)+" sec."))
