@@ -1,66 +1,104 @@
 from pathlib import Path
-import pandas as pd
-import nltk
 import time
+
+import nltk
+import pandas as pd
 from nltk.corpus import stopwords
 from nltk.stem import PorterStemmer
 from nltk.tokenize import RegexpTokenizer
 
-DATA_DIR = Path('E:\study\S2\Evaluating-Econometric-Methods_data\Evaluating_Econometric_Methods_MyProject')
 
-# Instantiate once, not per row
-TOKENIZER = RegexpTokenizer(r'\w+')
-STEMMER   = PorterStemmer()
-STOPWORDS = set(stopwords.words('english'))
-KEEP_POS  = {'NOUN', 'VERB', 'ADJ', 'ADP'}
-EXTRA_STOP = {'canada', 'hon', 'member', 'question', 'ask'}
+# =============================================================================
+# Parameters
+# =============================================================================
+
+DATA_DIR = Path(r"E:\study\S2\Evaluating-Econometric-Methods_data\Evaluating_Econometric_Methods_MyProject")
+INPUT_DIR = DATA_DIR / "input" / "lipad"
+OUTPUT_DIR = DATA_DIR / "output" / "processed_data"
+
+TOKENIZER = RegexpTokenizer(r"\w+")
+STEMMER = PorterStemmer()
+STOPWORDS = set(stopwords.words("english"))
+KEEP_POS = {"NOUN", "VERB", "ADJ", "ADP"}
+
+EXTRA_STOP = {
+    "hon", "member", "mr", "speaker", "chairman", "minister",
+    "would", "read", "think", "know", "made", "say",
+    "ye", "b", "aba", "surditi", "newsom", "oh", "zurich",
+}
 
 
-def load_speeches(year: int, month: int,step: int) -> pd.DataFrame:
-    """Load one Speeches{year}_{step}.xlsx file, dedupe, filter by length."""
-    path = DATA_DIR / 'input' / 'lipad' / str(year) / str(month) / f'{year}-{month}-{step}.csv'
-    df = (pd.read_csv(path)
-            .dropna(subset=['speakername', 'speechtext'])
-            .drop_duplicates(subset='speechtext'))
-    df['year'] = df['speechdate'].str.split('-').str[0]
-    df = df[['basepk', 'speechtext', 'speakername', 'year']]
-    print(f"Mean length: {df['speechtext'].str.len().mean():.1f}")
-    return df.copy()
+# =============================================================================
+# Text processing
+# =============================================================================
+
+def load_speeches(year, month, day):
+    input_path = INPUT_DIR / str(year) / str(month) / f"{year}-{month}-{day}.csv"
+
+    data = pd.read_csv(input_path)
+    data = data.dropna(subset=["speakername", "speechtext"])
+    data = data.drop_duplicates(subset="speechtext")
+
+    data["year"] = data["speechdate"].str.split("-").str[0]
+    data = data[["basepk", "speechtext", "speakername", "year"]]
+
+    print(f"Mean length: {data['speechtext'].str.len().mean():.1f}")
+
+    return data.copy()
 
 
-def clean_text(text: str, extra_stop: set = EXTRA_STOP) -> str:
-    """Tokenize → POS-tag → keep content words → stem."""
+def clean_text(text, extra_stop=EXTRA_STOP):
+    """Tokenize, keep selected parts of speech, remove stop words, and stem words."""
     tokens = TOKENIZER.tokenize(text.lower())
-    tagged = nltk.pos_tag(tokens, tagset='universal')
-    keep = [
-        STEMMER.stem(w) for w, pos in tagged
-        if pos in KEEP_POS and w not in STOPWORDS and w not in extra_stop
-    ]
-    return ' '.join(keep)
+    tagged_tokens = nltk.pos_tag(tokens, tagset="universal")
+
+    cleaned_words = []
+    for word, pos in tagged_tokens:
+        if pos in KEEP_POS and word not in STOPWORDS and word not in extra_stop:
+            cleaned_words.append(STEMMER.stem(word))
+
+    return " ".join(cleaned_words)
 
 
-def preprocess(year: int, month: int, step: int, extra_stop: set = EXTRA_STOP) -> pd.DataFrame:
-    df = load_speeches(year, month, step)
-    print(f"Loaded {len(df)} speeches.")
-    df['speechtext'] = df['speechtext'].map(lambda t: clean_text(t, extra_stop))
-    df = df.dropna(subset=['speechtext'])
-    return df
+def preprocess_file(year, month, day):
+    data = load_speeches(year, month, day)
+    print(f"Loaded {len(data)} speeches.")
+
+    data["speechtext"] = data["speechtext"].map(clean_text)
+    data = data.dropna(subset=["speechtext"])
+
+    return data
 
 
-if __name__ == '__main__':
-    beg = time.time()
+# =============================================================================
+# Main workflow
+# =============================================================================
+
+def main():
+    OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
+
+    start_time = time.time()
+
     for year in range(1901, 2020):
         for month in range(1, 13):
-            for step in range(1, 32):
-                path1 = DATA_DIR / 'input' / 'lipad' / str(year) / str(month) / f'{year}-{month}-{step}.csv'
-                path2 = DATA_DIR / 'output' / 'processed_data' / f'{year}-{month}-{step}.csv'
-                if not path1.exists():
-                    print(f"File not found: {year}-{month}-{step}.csv")
+            for day in range(1, 32):
+                input_path = INPUT_DIR / str(year) / str(month) / f"{year}-{month}-{day}.csv"
+                output_path = OUTPUT_DIR / f"{year}-{month}-{day}.csv"
+
+                if not input_path.exists():
+                    print(f"File not found: {year}-{month}-{day}.csv")
                     continue
-                if path2.exists():
-                    print(f"Already processed: {year}-{month}-{step}.csv")
+
+                if output_path.exists():
+                    print(f"Already processed: {year}-{month}-{day}.csv")
                     continue
-                df = preprocess(year, month, step)
-                df.to_csv(path2, index=False, sep=';')
-    end = time.time()
-    print("Duration of Preparation: "+str('{:8.2f}'.format(end-beg)+" sec."))
+
+                data = preprocess_file(year, month, day)
+                data.to_csv(output_path, index=False, sep=";")
+
+    end_time = time.time()
+    print(f"Duration of Preparation: {end_time - start_time:8.2f} sec.")
+
+
+if __name__ == "__main__":
+    main()
