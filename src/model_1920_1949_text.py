@@ -1,9 +1,7 @@
 from pathlib import Path
-import time
 
 import joblib
 import pandas as pd
-from nltk.tokenize import RegexpTokenizer
 from scipy import sparse
 from sklearn.cluster import KMeans
 from sklearn.feature_extraction.text import TfidfVectorizer
@@ -35,54 +33,20 @@ EARLY_TEST_END_YEAR = 1929
 LATE_TEST_START_YEAR = 1945
 LATE_TEST_END_YEAR = 1949
 
-cluster_groups = 20
-ngrams = 2
-min_words_per_speech = 20
-min_df = 5
-max_df = 0.8
-
+MIN_SPEECHTEXT_LENGTH = 10
+N_CLUSTERS = 20
 TOP_TERMS_PER_CLUSTER = 30
-random_seed = 1
-
-custom_stop_words = {
-    # Parliamentary titles and address terms that usually do not describe speech topics.
-    "hon", "member", "mr", "speaker", "chairman", "minist",
-
-    # Very common debate words that make clusters less topic-specific.
-    "would", "read", "think", "know", "made", "say",
-
-    # Clear transcription/OCR noise found in the first clustering result.
-    "ye", "b", "aba", "surditi", "newsom", "oh", "zurich",
-}
-
-
-def remove_custom_stop_words(text):
-    words = text.split()
-    filtered_words = []
-
-    for word in words:
-        if word not in custom_stop_words:
-            filtered_words.append(word)
-
-    return " ".join(filtered_words)
+RANDOM_STATE = 42
 
 
 def load_and_filter_data():
-    """Load data, keep speeches with enough words, and add length columns."""
+    """Load data, keep longer speeches, and add speechtext_length."""
     data = pd.read_csv(INPUT_FILE, sep=";")
 
-    data = data.dropna(subset=["speechtext"]).copy()
-    data["speechtext"] = data["speechtext"].astype(str).str.strip()
-    data = data[data["speechtext"] != ""].copy()
-
-    data["speechtext"] = data["speechtext"].map(remove_custom_stop_words)
-    data["speechtext"] = data["speechtext"].str.strip()
-    data = data[data["speechtext"] != ""].copy()
-
+    data["speechtext"] = data["speechtext"].fillna("").astype(str)
     data["speechtext_length"] = data["speechtext"].str.len()
-    data["word_count"] = data["speechtext"].str.split().str.len()
 
-    filtered_data = data[data["word_count"] >= min_words_per_speech].copy()
+    filtered_data = data[data["speechtext_length"] > MIN_SPEECHTEXT_LENGTH].copy()
     filtered_data = filtered_data.reset_index(drop=True)
 
     return filtered_data
@@ -115,15 +79,12 @@ def fit_tfidf_vectorizer(data):
     train_mask = data["year"].between(TRAIN_START_YEAR, TRAIN_END_YEAR)
     train_texts = data.loc[train_mask, "speechtext"]
     all_texts = data["speechtext"]
-    token = RegexpTokenizer("[a-zA-Z]+")
 
     vectorizer = TfidfVectorizer(
-        lowercase=True,
-        tokenizer=token.tokenize,
-        token_pattern=None,
-        ngram_range=(1, ngrams),
-        min_df=min_df,
-        max_df=max_df,
+        max_features=20000,
+        min_df=5,
+        max_df=0.90,
+        stop_words="english",
     )
 
     train_tfidf = vectorizer.fit_transform(train_texts)
@@ -135,17 +96,12 @@ def fit_tfidf_vectorizer(data):
 def fit_and_predict_kmeans(data, train_tfidf, all_tfidf, train_mask):
     """Fit KMeans on 1930-1945 only, then assign clusters to all rows."""
     kmeans = KMeans(
-        n_clusters=cluster_groups,
-        init="k-means++",
-        max_iter=300,
+        n_clusters=N_CLUSTERS,
+        random_state=RANDOM_STATE,
         n_init=10,
-        random_state=random_seed,
     )
 
-    start_time = time.time()
     kmeans.fit(train_tfidf)
-    end_time = time.time()
-    print(f"Duration of KMeans training: {end_time - start_time:8.2f} sec.", flush=True)
 
     data = data.copy()
     data["kmeans_cluster"] = kmeans.predict(all_tfidf)
@@ -189,13 +145,10 @@ def fit_and_predict_logistic_regression(data, train_tfidf, all_tfidf, train_mask
 
     logistic_model = LogisticRegression(
         max_iter=1000,
-        random_state=random_seed,
+        random_state=RANDOM_STATE,
     )
 
-    start_time = time.time()
     logistic_model.fit(train_tfidf, train_labels)
-    end_time = time.time()
-    print(f"Duration of Logistic Regression training: {end_time - start_time:8.2f} sec.", flush=True)
 
     data = data.copy()
     data["logistic_regression_category"] = logistic_model.predict(all_tfidf)
@@ -233,23 +186,15 @@ def save_models_and_matrices(vectorizer, kmeans, logistic_model, train_tfidf, al
 def main():
     OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
     MODEL_DIR.mkdir(parents=True, exist_ok=True)
-    start_time = time.time()
 
     data = load_and_filter_data()
     data = add_period_labels(data)
 
-    print(f"Rows after speechtext word-count filter: {len(data)}", flush=True)
+    print(f"Rows after speechtext length filter: {len(data)}")
 
-    vectorizer_start_time = time.time()
     vectorizer, train_tfidf, all_tfidf, train_mask = fit_tfidf_vectorizer(data)
-    vectorizer_end_time = time.time()
-
-    print(f"Rows in training period 1930-1945: {train_mask.sum()}", flush=True)
-    print(f"TF-IDF features: {len(vectorizer.get_feature_names_out())}", flush=True)
-    print(
-        f"Duration of TF-IDF transformation: {vectorizer_end_time - vectorizer_start_time:8.2f} sec.",
-        flush=True,
-    )
+    print(f"Rows in training period 1930-1945: {train_mask.sum()}")
+    print(f"TF-IDF features: {len(vectorizer.get_feature_names_out())}")
 
     data, kmeans = fit_and_predict_kmeans(data, train_tfidf, all_tfidf, train_mask)
     save_cluster_top_terms(kmeans, vectorizer)
@@ -266,11 +211,9 @@ def main():
 
     data.to_csv(PROCESSED_OUTPUT_FILE, sep=";", index=False)
 
-    end_time = time.time()
-    print(f"Saved second-stage data to: {PROCESSED_OUTPUT_FILE}", flush=True)
-    print(f"Saved cluster top terms to: {CLUSTER_TERMS_FILE}", flush=True)
-    print(f"Saved models to: {MODEL_DIR}", flush=True)
-    print(f"Duration of second-stage modeling: {end_time - start_time:8.2f} sec.", flush=True)
+    print(f"Saved second-stage data to: {PROCESSED_OUTPUT_FILE}")
+    print(f"Saved cluster top terms to: {CLUSTER_TERMS_FILE}")
+    print(f"Saved models to: {MODEL_DIR}")
 
 
 if __name__ == "__main__":
