@@ -1,0 +1,44 @@
+{
+  "categories": [
+    {
+      "name": "International Trade and Tariffs",
+      "definition": "Concerns the regulation of Canada's commercial relationships with other nations, including the negotiation and implementation of trade agreements, the setting of customs tariffs and duties, and the administration of import and export controls."
+    },
+    {
+      "name": "Agriculture and Food Policy",
+      "definition": "Pertains to the federal government's role in supporting and regulating the agricultural sector, including farm credit, debt relief, price supports, grain marketing, land settlement programs, and food safety regulations."
+    },
+    {
+      "name": "Transportation and Communications",
+      "definition": "Involves the development, financing, and regulation of national transportation and communications infrastructure, such as railways, shipping, highways, air travel, postal services, and radio broadcasting."
+    },
+    {
+      "name": "Public Finance and Taxation",
+      "definition": "Relates to the management of federal government revenues and expenditures, including the annual budget, amendments to taxation legislation, government borrowing, and general oversight of departmental spending."
+    },
+    {
+      "name": "Banking and Monetary Policy",
+      "definition": "Focuses on the regulation of Canada's financial system, including the establishment and governance of the Bank of Canada, currency and credit policy, foreign exchange controls, and the chartering of banks and loan companies."
+    },
+    {
+      "name": "Social Welfare and Labour",
+      "definition": "Covers the development and administration of social safety nets and labour regulations, including unemployment insurance and relief, old-age and disability pensions, family allowances, and industrial relations."
+    },
+    {
+      "name": "Veterans' and Military Affairs",
+      "definition": "Encompasses all matters related to the armed forces and former service members, including defence policy, military procurement, conscription, wartime emergency powers, and the administration of veterans' pensions and benefits."
+    },
+    {
+      "name": "Justice, Constitution, and Indigenous Affairs",
+      "definition": "Deals with the legal and constitutional framework of the country, including amendments to the Criminal Code, the structure of the judiciary, changes to the British North America Act, citizenship and immigration law, and the administration of the Indian Act."
+    },
+    {
+      "name": "Government and Parliamentary Affairs",
+      "definition": "Concerns the machinery and processes of governance, including electoral matters like redistribution and franchise acts, the administration of the civil service, and the internal rules, procedures, and conduct of Parliament."
+    },
+    {
+      "name": "Natural Resources and Intergovernmental Relations",
+      "definition": "Pertains to federal jurisdiction over natural resources and the relationship between the federal and provincial governments, including the transfer of resources to provinces, federal-provincial tax agreements, energy policy, and fisheries."
+    }
+  ]
+}
