@@ -1,4 +1,5 @@
 from pathlib import Path
+import time
 
 import joblib
 import pandas as pd
@@ -141,7 +142,10 @@ def fit_and_predict_kmeans(data, train_tfidf, all_tfidf, train_mask):
         random_state=random_seed,
     )
 
+    start_time = time.time()
     kmeans.fit(train_tfidf)
+    end_time = time.time()
+    print(f"Duration of KMeans training: {end_time - start_time:8.2f} sec.", flush=True)
 
     data = data.copy()
     data["kmeans_cluster"] = kmeans.predict(all_tfidf)
@@ -188,7 +192,10 @@ def fit_and_predict_logistic_regression(data, train_tfidf, all_tfidf, train_mask
         random_state=random_seed,
     )
 
+    start_time = time.time()
     logistic_model.fit(train_tfidf, train_labels)
+    end_time = time.time()
+    print(f"Duration of Logistic Regression training: {end_time - start_time:8.2f} sec.", flush=True)
 
     data = data.copy()
     data["logistic_regression_category"] = logistic_model.predict(all_tfidf)
@@ -226,15 +233,23 @@ def save_models_and_matrices(vectorizer, kmeans, logistic_model, train_tfidf, al
 def main():
     OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
     MODEL_DIR.mkdir(parents=True, exist_ok=True)
+    start_time = time.time()
 
     data = load_and_filter_data()
     data = add_period_labels(data)
 
-    print(f"Rows after speechtext length filter: {len(data)}")
+    print(f"Rows after speechtext word-count filter: {len(data)}", flush=True)
 
+    vectorizer_start_time = time.time()
     vectorizer, train_tfidf, all_tfidf, train_mask = fit_tfidf_vectorizer(data)
-    print(f"Rows in training period 1930-1945: {train_mask.sum()}")
-    print(f"TF-IDF features: {len(vectorizer.get_feature_names_out())}")
+    vectorizer_end_time = time.time()
+
+    print(f"Rows in training period 1930-1945: {train_mask.sum()}", flush=True)
+    print(f"TF-IDF features: {len(vectorizer.get_feature_names_out())}", flush=True)
+    print(
+        f"Duration of TF-IDF transformation: {vectorizer_end_time - vectorizer_start_time:8.2f} sec.",
+        flush=True,
+    )
 
     data, kmeans = fit_and_predict_kmeans(data, train_tfidf, all_tfidf, train_mask)
     save_cluster_top_terms(kmeans, vectorizer)
@@ -251,9 +266,11 @@ def main():
 
     data.to_csv(PROCESSED_OUTPUT_FILE, sep=";", index=False)
 
-    print(f"Saved second-stage data to: {PROCESSED_OUTPUT_FILE}")
-    print(f"Saved cluster top terms to: {CLUSTER_TERMS_FILE}")
-    print(f"Saved models to: {MODEL_DIR}")
+    end_time = time.time()
+    print(f"Saved second-stage data to: {PROCESSED_OUTPUT_FILE}", flush=True)
+    print(f"Saved cluster top terms to: {CLUSTER_TERMS_FILE}", flush=True)
+    print(f"Saved models to: {MODEL_DIR}", flush=True)
+    print(f"Duration of second-stage modeling: {end_time - start_time:8.2f} sec.", flush=True)
 
 
 if __name__ == "__main__":
