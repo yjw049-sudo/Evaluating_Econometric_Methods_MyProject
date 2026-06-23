@@ -1,33 +1,36 @@
-from pathlib import Path
 import re
 import time
 
 import pandas as pd
+
+from project_config import (
+    BASEPK_COLUMN,
+    CSV_SEPARATOR,
+    LECTURE_DIR,
+    OUTPUT_1920_1949_DIR,
+    PROCESSED_DATA_DIR,
+)
 
 
 # =============================================================================
 # Parameters
 # =============================================================================
 
-DATA_DIR = Path(r"E:\study\S2\Evaluating-Econometric-Methods_data\Evaluating_Econometric_Methods_MyProject")
-
-PROCESSED_DATA_DIR = DATA_DIR / "output" / "processed_data"
 CLASSIFIED_FILE = (
-    DATA_DIR
-    / "lecture"
+    LECTURE_DIR
     / "speeches_classified_2605"
     / "speeches_categorized_2605.csv"
 )
-OUTPUT_DIR = DATA_DIR / "output" / "1920-1949-v1"
+OUTPUT_DIR = OUTPUT_1920_1949_DIR
 
 START_YEAR = 1920
 END_YEAR = 1949
 
-INPUT_SEPARATOR = ";"
-OUTPUT_SEPARATOR = ";"
+INPUT_SEPARATOR = CSV_SEPARATOR
+OUTPUT_SEPARATOR = CSV_SEPARATOR
 CLASSIFIED_SEPARATOR = ","
 
-MERGE_KEY = "basepk"
+MERGE_KEY = BASEPK_COLUMN
 MERGE_TYPE = "inner"
 
 PROCESSED_OUTPUT_FILE = OUTPUT_DIR / "processed_data_1920_1949.csv"

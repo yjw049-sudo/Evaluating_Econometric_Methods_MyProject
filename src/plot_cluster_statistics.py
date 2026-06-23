@@ -1,20 +1,15 @@
-from pathlib import Path
-
 import joblib
 import matplotlib.pyplot as plt
 import pandas as pd
 from scipy import sparse
 
-
-# =============================================================================
-# Parameters
-# =============================================================================
-
-PROJECT_DIR = Path(
-    r"E:\study\S2\Evaluating-Econometric-Methods_data\Evaluating_Econometric_Methods_MyProject"
+from project_config import (
+    CLUSTER_COLUMN,
+    CSV_SEPARATOR,
+    OUTPUT_1920_1949_DIR,
 )
 
-OUTPUT_DIR = PROJECT_DIR / "output" / "1920-1949-v1"
+OUTPUT_DIR = OUTPUT_1920_1949_DIR
 MODEL_DIR = OUTPUT_DIR / "models"
 STATISTICS_DIR = OUTPUT_DIR / "cluster_statistics"
 FIGURE_DIR = OUTPUT_DIR / "figures"
@@ -28,7 +23,6 @@ CLUSTER_TOP_WORDS_FILE = STATISTICS_DIR / "cluster_top_10_words_by_tfidf_share.c
 CLUSTER_SHARE_PLOT_FILE = FIGURE_DIR / "cluster_share_bar.png"
 
 TOP_WORDS = 10
-CSV_SEPARATOR = ";"
 
 
 # =============================================================================
@@ -56,10 +50,10 @@ def calculate_cluster_summary(data):
     total_count = len(data)
 
     cluster_summary = (
-        data.groupby("kmeans_cluster")
+        data.groupby(CLUSTER_COLUMN)
         .size()
         .reset_index(name="speech_count")
-        .sort_values("kmeans_cluster")
+        .sort_values(CLUSTER_COLUMN)
     )
 
     cluster_summary["speech_share"] = cluster_summary["speech_count"] / total_count
@@ -72,8 +66,8 @@ def calculate_top_words_by_cluster(data, vectorizer, tfidf_matrix):
     feature_names = vectorizer.get_feature_names_out()
     top_word_rows = []
 
-    for cluster_id in sorted(data["kmeans_cluster"].unique()):
-        cluster_mask = data["kmeans_cluster"].to_numpy() == cluster_id
+    for cluster_id in sorted(data[CLUSTER_COLUMN].unique()):
+        cluster_mask = data[CLUSTER_COLUMN].to_numpy() == cluster_id
         cluster_tfidf = tfidf_matrix[cluster_mask]
 
         word_weights = cluster_tfidf.sum(axis=0).A1
@@ -89,7 +83,7 @@ def calculate_top_words_by_cluster(data, vectorizer, tfidf_matrix):
 
             top_word_rows.append(
                 {
-                    "kmeans_cluster": cluster_id,
+                    CLUSTER_COLUMN: cluster_id,
                     "rank": rank,
                     "word": feature_names[word_index],
                     "tfidf_weight_sum": word_weight,
@@ -110,7 +104,7 @@ def plot_cluster_share(cluster_summary):
     figure, axis = plt.subplots(figsize=(12, 6))
 
     axis.bar(
-        cluster_summary["kmeans_cluster"].astype(str),
+        cluster_summary[CLUSTER_COLUMN].astype(str),
         cluster_summary["speech_share_percent"],
     )
 

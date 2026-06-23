@@ -1,25 +1,19 @@
-from pathlib import Path
 import math
 
 import pandas as pd
 
-
-# =============================================================================
-# Parameters
-# =============================================================================
-
-PROJECT_DIR = Path(
-    r"E:\study\S2\Evaluating-Econometric-Methods_data\Evaluating_Econometric_Methods_MyProject"
+from project_config import (
+    AI_LABEL_COLUMN,
+    CLUSTER_COLUMN,
+    CSV_SEPARATOR,
+    OUTPUT_1920_1949_DIR,
+    YEAR_COLUMN,
 )
 
-OUTPUT_DIR = PROJECT_DIR / "output" / "1920-1949-v1"
+OUTPUT_DIR = OUTPUT_1920_1949_DIR
 ANALYSIS_DIR = OUTPUT_DIR / "cluster_label_consistency"
 
 INPUT_FILE = OUTPUT_DIR / "speeches_1920_1949_second_stage.csv"
-
-CLUSTER_COLUMN = "kmeans_cluster"
-AI_LABEL_COLUMN = "category"
-YEAR_COLUMN = "year"
 
 PRE_TEST_START_YEAR = 1920
 PRE_TEST_END_YEAR = 1929
@@ -28,7 +22,6 @@ TRAIN_END_YEAR = 1945
 POST_TEST_START_YEAR = 1946
 POST_TEST_END_YEAR = 1949
 
-CSV_SEPARATOR = ";"
 
 CROSSTAB_COUNTS_FILE = ANALYSIS_DIR / "cluster_ai_label_crosstab_counts.csv"
 CROSSTAB_ROW_SHARES_FILE = ANALYSIS_DIR / "cluster_ai_label_crosstab_row_shares.csv"

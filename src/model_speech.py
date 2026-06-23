@@ -1,4 +1,3 @@
-from pathlib import Path
 import math
 import time
 
@@ -10,14 +9,12 @@ from sklearn.cluster import KMeans
 from sklearn.feature_extraction.text import TfidfVectorizer
 from tqdm import tqdm
 
+from project_config import FINAL_DIR, PROCESSED_DATA_DIR
+
 
 # =============================================================================
 # Parameters
 # =============================================================================
-
-PROJECT_DIR = Path(r"E:\study\S2\Evaluating-Econometric-Methods_data\Evaluating_Econometric_Methods_MyProject")
-PROCESSED_DATA_DIR = PROJECT_DIR / "output" / "processed_data"
-FINAL_DIR = PROJECT_DIR / "Final"
 
 cluster_groups = 20
 ngrams = 2

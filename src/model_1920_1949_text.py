@@ -1,25 +1,32 @@
-from pathlib import Path
-
 import joblib
 import pandas as pd
 from scipy import sparse
 from sklearn.cluster import KMeans
 from sklearn.feature_extraction.text import TfidfVectorizer
 
+from project_config import (
+    AI_LABEL_COLUMN,
+    BASEPK_COLUMN,
+    CLUSTER_COLUMN,
+    CSV_SEPARATOR,
+    FULL_CORPUS_OUTPUT_DIR,
+    LIPAD_DIR,
+    ORIGINAL_TEXT_COLUMN,
+    OUTPUT_1920_1949_DIR,
+    TEXT_COLUMN,
+    YEAR_COLUMN,
+)
+
 
 # =============================================================================
 # Project paths
 # =============================================================================
 
-PROJECT_DIR = Path(
-    r"E:\study\S2\Evaluating-Econometric-Methods_data\Evaluating_Econometric_Methods_MyProject"
-)
-
-INPUT_DIR = PROJECT_DIR / "output" / "1920-1949-v1"
+INPUT_DIR = OUTPUT_1920_1949_DIR
 INPUT_FILE = INPUT_DIR / "speeches_1920_1949_merged.csv"
-ORIGINAL_INPUT_DIR = PROJECT_DIR / "input" / "lipad"
+ORIGINAL_INPUT_DIR = LIPAD_DIR
 
-OUTPUT_DIR = PROJECT_DIR / "output" / "1920-1949-full-corpus-v1"
+OUTPUT_DIR = FULL_CORPUS_OUTPUT_DIR
 MODEL_DIR = OUTPUT_DIR / "models"
 
 PROCESSED_OUTPUT_FILE = OUTPUT_DIR / "speeches_1920_1949_kmeans_ai_label_structure.csv"
@@ -53,12 +60,6 @@ N_CLUSTERS = 20
 NGRAM_RANGE = (1, 2)
 TOP_TERMS_PER_CLUSTER = 30
 RANDOM_STATE = 42
-
-TEXT_COLUMN = "speechtext"
-ORIGINAL_TEXT_COLUMN = "speechtext_oringinal"
-BASEPK_COLUMN = "basepk"
-YEAR_COLUMN = "year"
-AI_LABEL_COLUMN = "category"
 
 START_YEAR = 1920
 END_YEAR = 1949
@@ -115,7 +116,7 @@ def load_and_filter_data():
     The filtering is based on word count rather than character length, because
     very short texts are usually not informative for TF-IDF and k-means.
     """
-    data = pd.read_csv(INPUT_FILE, sep=";")
+    data = pd.read_csv(INPUT_FILE, sep=CSV_SEPARATOR)
 
     required_columns = [BASEPK_COLUMN, TEXT_COLUMN, YEAR_COLUMN, AI_LABEL_COLUMN]
     missing_columns = [column for column in required_columns if column not in data.columns]
@@ -123,7 +124,10 @@ def load_and_filter_data():
     if missing_columns:
         raise ValueError(f"Input file is missing required columns: {missing_columns}")
 
-    data[BASEPK_COLUMN] = pd.to_numeric(data[BASEPK_COLUMN], errors="coerce").astype("Int64")
+    data[BASEPK_COLUMN] = pd.to_numeric(
+        data[BASEPK_COLUMN],
+        errors="coerce",
+    ).astype("Int64")
     data = data.dropna(subset=[BASEPK_COLUMN]).copy()
 
     original_data = load_original_speechtext()
@@ -206,7 +210,7 @@ def fit_kmeans(data, all_tfidf):
     )
 
     data = data.copy()
-    data["kmeans_cluster"] = kmeans.fit_predict(all_tfidf)
+    data[CLUSTER_COLUMN] = kmeans.fit_predict(all_tfidf)
 
     return data, kmeans
 
@@ -228,7 +232,7 @@ def save_cluster_top_terms(kmeans, vectorizer):
         for rank, term_index in enumerate(top_indices, start=1):
             rows.append(
                 {
-                    "kmeans_cluster": cluster_id,
+                    CLUSTER_COLUMN: cluster_id,
                     "rank": rank,
                     "term": feature_names[term_index],
                     "tfidf_center_weight": center[term_index],
@@ -236,7 +240,7 @@ def save_cluster_top_terms(kmeans, vectorizer):
             )
 
     cluster_terms = pd.DataFrame(rows)
-    cluster_terms.to_csv(CLUSTER_TERMS_FILE, sep=";", index=False)
+    cluster_terms.to_csv(CLUSTER_TERMS_FILE, sep=CSV_SEPARATOR, index=False)
 
 
 def save_cluster_counts(data):
@@ -244,32 +248,40 @@ def save_cluster_counts(data):
     Save cluster size tables.
     """
     cluster_counts = (
-        data.groupby("kmeans_cluster")
+        data.groupby(CLUSTER_COLUMN)
         .size()
         .reset_index(name="count")
-        .sort_values("kmeans_cluster")
+        .sort_values(CLUSTER_COLUMN)
     )
 
     cluster_counts["share"] = cluster_counts["count"] / cluster_counts["count"].sum()
-    cluster_counts.to_csv(CLUSTER_COUNTS_FILE, sep=";", index=False)
+    cluster_counts.to_csv(CLUSTER_COUNTS_FILE, sep=CSV_SEPARATOR, index=False)
 
     cluster_counts_by_year = (
-        data.groupby([YEAR_COLUMN, "kmeans_cluster"])
+        data.groupby([YEAR_COLUMN, CLUSTER_COLUMN])
         .size()
         .reset_index(name="count")
-        .sort_values([YEAR_COLUMN, "kmeans_cluster"])
+        .sort_values([YEAR_COLUMN, CLUSTER_COLUMN])
     )
 
-    cluster_counts_by_year.to_csv(CLUSTER_COUNTS_BY_YEAR_FILE, sep=";", index=False)
+    cluster_counts_by_year.to_csv(
+        CLUSTER_COUNTS_BY_YEAR_FILE,
+        sep=CSV_SEPARATOR,
+        index=False,
+    )
 
     cluster_counts_by_period = (
-        data.groupby(["period", "kmeans_cluster"])
+        data.groupby(["period", CLUSTER_COLUMN])
         .size()
         .reset_index(name="count")
-        .sort_values(["period", "kmeans_cluster"])
+        .sort_values(["period", CLUSTER_COLUMN])
     )
 
-    cluster_counts_by_period.to_csv(CLUSTER_COUNTS_BY_PERIOD_FILE, sep=";", index=False)
+    cluster_counts_by_period.to_csv(
+        CLUSTER_COUNTS_BY_PERIOD_FILE,
+        sep=CSV_SEPARATOR,
+        index=False,
+    )
 
 
 # =============================================================================
@@ -306,7 +318,7 @@ def save_cluster_ai_label_crosstabs(data):
        This answers: how is each AI label distributed across clusters?
     """
     cluster_ai_label_counts = pd.crosstab(
-        data["kmeans_cluster"],
+        data[CLUSTER_COLUMN],
         data[AI_LABEL_COLUMN],
     )
 
@@ -317,7 +329,7 @@ def save_cluster_ai_label_crosstabs(data):
 
     ai_label_cluster_counts = pd.crosstab(
         data[AI_LABEL_COLUMN],
-        data["kmeans_cluster"],
+        data[CLUSTER_COLUMN],
     )
 
     ai_label_cluster_row_shares = ai_label_cluster_counts.div(
@@ -325,11 +337,17 @@ def save_cluster_ai_label_crosstabs(data):
         axis=0,
     )
 
-    cluster_ai_label_counts.to_csv(CLUSTER_AI_LABEL_COUNTS_FILE, sep=";")
-    cluster_ai_label_row_shares.to_csv(CLUSTER_AI_LABEL_ROW_SHARES_FILE, sep=";")
+    cluster_ai_label_counts.to_csv(CLUSTER_AI_LABEL_COUNTS_FILE, sep=CSV_SEPARATOR)
+    cluster_ai_label_row_shares.to_csv(
+        CLUSTER_AI_LABEL_ROW_SHARES_FILE,
+        sep=CSV_SEPARATOR,
+    )
 
-    ai_label_cluster_counts.to_csv(AI_LABEL_CLUSTER_COUNTS_FILE, sep=";")
-    ai_label_cluster_row_shares.to_csv(AI_LABEL_CLUSTER_ROW_SHARES_FILE, sep=";")
+    ai_label_cluster_counts.to_csv(AI_LABEL_CLUSTER_COUNTS_FILE, sep=CSV_SEPARATOR)
+    ai_label_cluster_row_shares.to_csv(
+        AI_LABEL_CLUSTER_ROW_SHARES_FILE,
+        sep=CSV_SEPARATOR,
+    )
 
     return (
         cluster_ai_label_counts,
@@ -357,7 +375,7 @@ def save_cluster_dominant_label_mapping(cluster_ai_label_counts):
 
         rows.append(
             {
-                "kmeans_cluster": cluster_id,
+                CLUSTER_COLUMN: cluster_id,
                 "dominant_ai_label": dominant_label,
                 "dominant_label_count": dominant_count,
                 "cluster_total": cluster_total,
@@ -367,7 +385,7 @@ def save_cluster_dominant_label_mapping(cluster_ai_label_counts):
         )
 
     mapping = pd.DataFrame(rows)
-    mapping.to_csv(CLUSTER_DOMINANT_LABEL_FILE, sep=";", index=False)
+    mapping.to_csv(CLUSTER_DOMINANT_LABEL_FILE, sep=CSV_SEPARATOR, index=False)
 
     return mapping
 
@@ -407,7 +425,7 @@ def save_ai_label_dominant_cluster_mapping(ai_label_cluster_counts):
         )
 
     mapping = pd.DataFrame(rows)
-    mapping.to_csv(AI_LABEL_DOMINANT_CLUSTER_FILE, sep=";", index=False)
+    mapping.to_csv(AI_LABEL_DOMINANT_CLUSTER_FILE, sep=CSV_SEPARATOR, index=False)
 
     return mapping
 
@@ -456,9 +474,9 @@ def main():
 
     (
         cluster_ai_label_counts,
-        cluster_ai_label_row_shares,
+        _cluster_ai_label_row_shares,
         ai_label_cluster_counts,
-        ai_label_cluster_row_shares,
+        _ai_label_cluster_row_shares,
     ) = save_cluster_ai_label_crosstabs(data)
 
     save_cluster_dominant_label_mapping(cluster_ai_label_counts)
@@ -466,7 +484,7 @@ def main():
 
     save_models_and_matrices(vectorizer, kmeans, all_tfidf)
 
-    data.to_csv(PROCESSED_OUTPUT_FILE, sep=";", index=False)
+    data.to_csv(PROCESSED_OUTPUT_FILE, sep=CSV_SEPARATOR, index=False)
 
     print(f"Saved processed data to: {PROCESSED_OUTPUT_FILE}")
     print(f"Saved cluster top terms to: {CLUSTER_TERMS_FILE}")

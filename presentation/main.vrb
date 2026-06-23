@@ -1,0 +1,23 @@
+\frametitle{Text representation and clustering}
+文本表示使用 TF-IDF。
+
+  \vspace{0.25cm}
+  KMeans 设定：
+  \begin{verbatim}
+KMeans(
+    n_clusters=20,
+    init="k-means++",
+    max_iter=300,
+    n_init=10,
+    random_state=42
+)
+  \end{verbatim}
+
+  \vspace{-0.1cm}
+  每个 cluster 的解释基于：
+  \begin{itemize}
+    \item top TF-IDF terms；
+    \item AI labels distribution；
+    \item representative original speeches；
+    \item historical interpretation。
+  \end{itemize}

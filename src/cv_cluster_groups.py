@@ -1,21 +1,10 @@
-from pathlib import Path
-import importlib.util
 import time
 
 import pandas as pd
 from sklearn.cluster import KMeans
 from sklearn.metrics import silhouette_score
 
-
-# =============================================================================
-# Import the main model pipeline
-# =============================================================================
-
-MODEL_SCRIPT_PATH = Path(__file__).resolve().parent / "model_speech.py"
-
-spec = importlib.util.spec_from_file_location("model_speech_pipeline", MODEL_SCRIPT_PATH)
-model_pipeline = importlib.util.module_from_spec(spec)
-spec.loader.exec_module(model_pipeline)
+import model_speech as model_pipeline
 
 
 # =============================================================================
