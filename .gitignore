@@ -1,0 +1,6 @@
+# Large source and generated data kept locally
+input/lipad/
+output/processed_data/
+output/1920-1949-v1/
+output/1920-1949-full-corpus-v1/
+
