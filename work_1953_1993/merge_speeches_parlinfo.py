@@ -22,7 +22,7 @@ OUTPUT_DIR = WORK_DIR / "output"
 INPUT_DIR = WORK_DIR / "input"
 
 # Input files
-SPEECH_FILE = OUTPUT_DIR / "processed_lipad_1953_1993_filtered.csv"
+SPEECH_FILE = OUTPUT_DIR / "processed_lipad_1963_1993_filtered.csv"
 PARLINFO_FILE = INPUT_DIR / "Parliamentarians.xlsx"
 
 # Output files

@@ -2,6 +2,7 @@ import os
 import re
 from pathlib import Path
 
+import numpy as np
 import pandas as pd
 
 
@@ -9,10 +10,11 @@ import pandas as pd
 # User settings: change these values when needed
 # =============================================================================
 
-START_YEAR = 1953
+START_YEAR = 1963
 END_YEAR = 1993
 
-MIN_WORD_COUNT = 30
+MIN_WORD_COUNT = 50
+MAX_WORD_COUNT_PERCENTILE = 99
 
 
 # =============================================================================
@@ -116,11 +118,20 @@ def get_lipad_file(processed_file):
 # =============================================================================
 
 def validate_year_settings():
-    """Check that the selected year range is valid."""
+    """Check that the selected year range and filter settings are valid."""
     if START_YEAR > END_YEAR:
         raise ValueError(
             f"START_YEAR ({START_YEAR}) cannot be greater than "
             f"END_YEAR ({END_YEAR})."
+        )
+
+    if MIN_WORD_COUNT < 0:
+        raise ValueError("MIN_WORD_COUNT cannot be negative.")
+
+    if not 0 < MAX_WORD_COUNT_PERCENTILE <= 100:
+        raise ValueError(
+            "MAX_WORD_COUNT_PERCENTILE must be greater than 0 "
+            "and no greater than 100."
         )
 
 
@@ -246,22 +257,90 @@ def merge_daily_file(processed_file):
     return merged_data, int(matched_row_count), True
 
 
-def filter_speeches(data):
+def add_word_count(data):
+    """Add the speechtext word-count column."""
+    data = data.copy()
+    speechtext = data[TEXT_COLUMN].fillna("").astype(str)
+    data["speechtext_word_count"] = speechtext.str.split().str.len()
+    return data
+
+
+def get_basic_filter_mask(data):
     """
-    Keep speeches with enough words and complete required information.
+    Identify rows with enough words and complete required information.
 
     Empty strings and values containing only spaces are treated as missing.
     """
-    speechtext = data[TEXT_COLUMN].fillna("").astype(str)
-
-    data = data.copy()
-    data["speechtext_word_count"] = speechtext.str.split().str.len()
-
     keep_rows = data["speechtext_word_count"].ge(MIN_WORD_COUNT)
 
     for column in REQUIRED_NON_MISSING_COLUMNS:
         complete_values = data[column].fillna("").astype(str).str.strip().ne("")
         keep_rows = keep_rows & complete_values
+
+    return keep_rows
+
+
+def calculate_max_word_count(processed_files):
+    """
+    Calculate the global upper word-count threshold.
+
+    The percentile is calculated after applying the minimum-word and
+    required-information filters.
+    """
+    eligible_word_counts = []
+
+    print(
+        f"First pass: calculating the {MAX_WORD_COUNT_PERCENTILE}th "
+        "percentile of speech length."
+    )
+
+    for file_number, processed_file in enumerate(processed_files, start=1):
+        merged_data, _, _ = merge_daily_file(processed_file)
+        merged_data = add_word_count(merged_data)
+        basic_filter_mask = get_basic_filter_mask(merged_data)
+
+        eligible_word_counts.extend(
+            merged_data.loc[
+                basic_filter_mask,
+                "speechtext_word_count",
+            ].tolist()
+        )
+
+        if file_number % 250 == 0 or file_number == len(processed_files):
+            print(
+                f"Percentile pass {file_number}/{len(processed_files)} files; "
+                f"eligible rows counted: {len(eligible_word_counts)}."
+            )
+
+    if not eligible_word_counts:
+        raise ValueError(
+            "No rows remain after applying the minimum-word and "
+            "required-information filters."
+        )
+
+    max_word_count = float(
+        np.percentile(
+            eligible_word_counts,
+            MAX_WORD_COUNT_PERCENTILE,
+        )
+    )
+
+    print(
+        f"{MAX_WORD_COUNT_PERCENTILE}th percentile word-count threshold: "
+        f"{max_word_count:.2f} words."
+    )
+
+    return max_word_count
+
+
+def filter_speeches(data, max_word_count):
+    """Apply the basic filters and remove texts above the percentile."""
+    data = add_word_count(data)
+    keep_rows = get_basic_filter_mask(data)
+    keep_rows = (
+        keep_rows
+        & data["speechtext_word_count"].le(max_word_count)
+    )
 
     return data.loc[keep_rows].copy()
 
@@ -291,9 +370,17 @@ def main():
         f"from {START_YEAR} through {END_YEAR}."
     )
 
+    max_word_count = calculate_max_word_count(processed_files)
+
+    print(
+        "Second pass: merging data and applying all filters, including "
+        f"speechtext_word_count <= {max_word_count:.2f}."
+    )
+
     total_rows = 0
     matched_rows = 0
     retained_rows = 0
+    removed_above_percentile = 0
     missing_lipad_files = []
     write_header = True
 
@@ -301,7 +388,20 @@ def main():
         merged_data, daily_matched_rows, lipad_file_exists = merge_daily_file(
             processed_file
         )
-        filtered_data = filter_speeches(merged_data)
+        merged_data = add_word_count(merged_data)
+        basic_filter_mask = get_basic_filter_mask(merged_data)
+
+        removed_above_percentile += int(
+            (
+                basic_filter_mask
+                & merged_data["speechtext_word_count"].gt(max_word_count)
+            ).sum()
+        )
+
+        filtered_data = merged_data.loc[
+            basic_filter_mask
+            & merged_data["speechtext_word_count"].le(max_word_count)
+        ].copy()
 
         filtered_data.to_csv(
             TEMP_OUTPUT_FILE,
@@ -336,6 +436,14 @@ def main():
     print(f"Input rows: {total_rows}")
     print(f"Rows matched by {MERGE_KEY}: {matched_rows}")
     print(f"Rows without a Lipad match: {unmatched_rows}")
+    print(
+        f"Maximum retained word count ({MAX_WORD_COUNT_PERCENTILE}th "
+        f"percentile): {max_word_count:.2f}"
+    )
+    print(
+        f"Rows removed above the percentile threshold: "
+        f"{removed_above_percentile}"
+    )
     print(f"Retained rows: {retained_rows}")
     print(f"Removed rows: {removed_rows}")
     print(f"Missing corresponding Lipad files: {len(missing_lipad_files)}")

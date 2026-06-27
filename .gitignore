@@ -3,4 +3,6 @@ input/lipad/
 output/processed_data/
 output/1920-1949-v1/
 output/1920-1949-full-corpus-v1/
-
+lecture
+.env
+work_1953_1993/Gemini/batch_parts
