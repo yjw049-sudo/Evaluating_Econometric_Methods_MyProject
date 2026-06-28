@@ -1,4 +1,4 @@
-"""Plot a selected column over time."""
+"""Plot two selected columns over time with two y-axes."""
 
 from pathlib import Path
 
@@ -15,8 +15,9 @@ from matplotlib.ticker import PercentFormatter
 # User settings
 # =============================================================================
 
-# Change this value to the column that you want to plot.
-VALUE_COLUMN = "party_at_date"
+# Change these two values to the columns that you want to plot.
+LEFT_VALUE_COLUMN = "party_at_date"
+RIGHT_VALUE_COLUMN = "your_second_column"
 
 
 # =============================================================================
@@ -29,9 +30,9 @@ INPUT_FILE = (
     PROJECT_ROOT
     / "work_1953_1993"
     / "output"
-    / "Kmeans"
-    / "speeches_with_parlinfo_kmeans.csv"
+    / "Speeches_final.csv"
 )
+
 OUTPUT_DIR = PROJECT_ROOT / "work_1953_1993" / "output" / "temp_pic"
 
 YEAR_COLUMN = "year"
@@ -43,7 +44,7 @@ CSV_SEPARATOR = ","
 # =============================================================================
 
 def load_data():
-    """Load the fixed year column and the selected value column."""
+    """Load the fixed year column and the two selected value columns."""
     if not INPUT_FILE.exists():
         raise FileNotFoundError(f"Input file was not found: {INPUT_FILE}")
 
@@ -53,7 +54,12 @@ def load_data():
         nrows=0,
     )
 
-    required_columns = [YEAR_COLUMN, VALUE_COLUMN]
+    required_columns = [
+        YEAR_COLUMN,
+        LEFT_VALUE_COLUMN,
+        RIGHT_VALUE_COLUMN,
+    ]
+
     missing_columns = [
         column
         for column in required_columns
@@ -65,10 +71,13 @@ def load_data():
             f"Columns were not found in the input file: {missing_columns}"
         )
 
+    # Use set() to avoid reading the same column twice if the two columns are identical.
+    use_columns = list(dict.fromkeys(required_columns))
+
     data = pd.read_csv(
         INPUT_FILE,
         sep=CSV_SEPARATOR,
-        usecols=required_columns,
+        usecols=use_columns,
         low_memory=False,
     )
 
@@ -76,21 +85,25 @@ def load_data():
         data[YEAR_COLUMN],
         errors="coerce",
     )
-    data = data.dropna(subset=[YEAR_COLUMN, VALUE_COLUMN]).copy()
+
+    data = data.dropna(subset=[YEAR_COLUMN]).copy()
     data[YEAR_COLUMN] = data[YEAR_COLUMN].astype(int)
 
     if data.empty:
-        raise ValueError(
-            f"No valid data remained for column: {VALUE_COLUMN}"
-        )
+        raise ValueError("No valid data remained after reading the year column.")
 
     return data
 
 
-def is_numeric_column(data):
+def is_numeric_column(data, value_column):
     """Return True when every non-missing value can be read as a number."""
+    column_data = data[value_column].dropna()
+
+    if column_data.empty:
+        raise ValueError(f"No valid data remained for column: {value_column}")
+
     numeric_values = pd.to_numeric(
-        data[VALUE_COLUMN],
+        column_data,
         errors="coerce",
     )
 
@@ -98,50 +111,53 @@ def is_numeric_column(data):
 
 
 # =============================================================================
-# Plotting
+# Data preparation for plotting
 # =============================================================================
 
-def plot_numeric_column(data):
-    """Plot the yearly mean of a numeric column."""
-    data[VALUE_COLUMN] = pd.to_numeric(data[VALUE_COLUMN])
+def prepare_numeric_column(data, value_column):
+    """Prepare yearly mean for a numeric column."""
+    temp = data[[YEAR_COLUMN, value_column]].dropna().copy()
+
+    temp[value_column] = pd.to_numeric(
+        temp[value_column],
+        errors="coerce",
+    )
+
+    temp = temp.dropna(subset=[value_column])
+
+    if temp.empty:
+        raise ValueError(f"No numeric data remained for column: {value_column}")
 
     yearly_values = (
-        data.groupby(YEAR_COLUMN, as_index=False)[VALUE_COLUMN]
+        temp.groupby(YEAR_COLUMN, as_index=False)[value_column]
         .mean()
         .sort_values(YEAR_COLUMN)
     )
 
-    figure, axis = plt.subplots(figsize=(12, 6))
+    yearly_values = yearly_values.set_index(YEAR_COLUMN)
 
-    axis.plot(
-        yearly_values[YEAR_COLUMN],
-        yearly_values[VALUE_COLUMN],
-        linewidth=2,
-        marker="o",
-        markersize=4,
-    )
-
-    axis.set_title(f"Yearly Mean of {VALUE_COLUMN}")
-    axis.set_xlabel("Year")
-    axis.set_ylabel(f"Mean of {VALUE_COLUMN}")
-
-    return figure, axis
+    return yearly_values, "numeric"
 
 
-def plot_categorical_column(data):
-    """Plot each category's yearly share for a non-numeric column."""
-    data[VALUE_COLUMN] = data[VALUE_COLUMN].astype(str).str.strip()
-    data = data[data[VALUE_COLUMN].ne("")].copy()
+def prepare_categorical_column(data, value_column):
+    """Prepare yearly share for each category in a categorical column."""
+    temp = data[[YEAR_COLUMN, value_column]].dropna().copy()
+
+    temp[value_column] = temp[value_column].astype(str).str.strip()
+    temp = temp[temp[value_column].ne("")].copy()
+
+    if temp.empty:
+        raise ValueError(f"No categorical data remained for column: {value_column}")
 
     yearly_counts = (
-        data.groupby([YEAR_COLUMN, VALUE_COLUMN])
+        temp.groupby([YEAR_COLUMN, value_column])
         .size()
         .rename("count")
         .reset_index()
     )
 
     yearly_totals = (
-        data.groupby(YEAR_COLUMN)
+        temp.groupby(YEAR_COLUMN)
         .size()
         .rename("year_total")
         .reset_index()
@@ -153,6 +169,7 @@ def plot_categorical_column(data):
         how="left",
         validate="many_to_one",
     )
+
     yearly_shares["share"] = (
         yearly_shares["count"]
         / yearly_shares["year_total"]
@@ -160,36 +177,113 @@ def plot_categorical_column(data):
 
     share_table = yearly_shares.pivot(
         index=YEAR_COLUMN,
-        columns=VALUE_COLUMN,
+        columns=value_column,
         values="share",
     ).fillna(0)
 
     share_table = share_table.sort_index()
 
-    figure, axis = plt.subplots(figsize=(14, 7))
+    return share_table, "categorical"
 
-    for category in share_table.columns:
+
+def prepare_column_for_plotting(data, value_column):
+    """Prepare one column for plotting."""
+    if is_numeric_column(data, value_column):
+        return prepare_numeric_column(data, value_column)
+
+    return prepare_categorical_column(data, value_column)
+
+
+# =============================================================================
+# Plotting
+# =============================================================================
+
+def plot_one_column(axis, plot_data, value_column, column_type, line_style):
+    """Plot one prepared column on the given axis."""
+    if column_type == "numeric":
         axis.plot(
-            share_table.index,
-            share_table[category],
+            plot_data.index,
+            plot_data[value_column],
             linewidth=2,
             marker="o",
-            markersize=3,
-            label=str(category),
+            markersize=4,
+            linestyle=line_style,
+            label=value_column,
         )
 
-    axis.set_title(f"Yearly Share of {VALUE_COLUMN}")
-    axis.set_xlabel("Year")
-    axis.set_ylabel("Share")
-    axis.yaxis.set_major_formatter(PercentFormatter(xmax=1))
-    axis.legend(
-        title=VALUE_COLUMN,
-        bbox_to_anchor=(1.02, 1),
+        axis.set_ylabel(f"Mean of {value_column}")
+
+    else:
+        for category in plot_data.columns:
+            axis.plot(
+                plot_data.index,
+                plot_data[category],
+                linewidth=2,
+                marker="o",
+                markersize=3,
+                linestyle=line_style,
+                label=f"{value_column}: {category}",
+            )
+
+        axis.set_ylabel(f"Share of {value_column}")
+        axis.yaxis.set_major_formatter(PercentFormatter(xmax=1))
+
+
+def plot_two_columns(data):
+    """Plot two selected columns over time using two y-axes."""
+    left_data, left_type = prepare_column_for_plotting(
+        data,
+        LEFT_VALUE_COLUMN,
+    )
+
+    right_data, right_type = prepare_column_for_plotting(
+        data,
+        RIGHT_VALUE_COLUMN,
+    )
+
+    figure, left_axis = plt.subplots(figsize=(14, 7))
+    right_axis = left_axis.twinx()
+
+    plot_one_column(
+        axis=left_axis,
+        plot_data=left_data,
+        value_column=LEFT_VALUE_COLUMN,
+        column_type=left_type,
+        line_style="-",
+    )
+
+    plot_one_column(
+        axis=right_axis,
+        plot_data=right_data,
+        value_column=RIGHT_VALUE_COLUMN,
+        column_type=right_type,
+        line_style="--",
+    )
+
+    left_axis.set_title(
+        f"{LEFT_VALUE_COLUMN} and {RIGHT_VALUE_COLUMN} over Time"
+    )
+    left_axis.set_xlabel("Year")
+
+    left_axis.grid(True, alpha=0.3)
+
+    left_handles, left_labels = left_axis.get_legend_handles_labels()
+    right_handles, right_labels = right_axis.get_legend_handles_labels()
+
+    left_axis.legend(
+        left_handles + right_handles,
+        left_labels + right_labels,
+        title="Variables",
+        bbox_to_anchor=(1.12, 1),
         loc="upper left",
     )
 
-    return figure, axis
+    return figure, left_axis, right_axis, left_type, right_type
 
+
+# =============================================================================
+# Utilities
+# =============================================================================
 
 def make_safe_filename(column_name):
     """Replace characters that cannot be used in Windows filenames."""
@@ -202,32 +296,36 @@ def make_safe_filename(column_name):
     return safe_name
 
 
+# =============================================================================
+# Main
+# =============================================================================
+
 def main():
     OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
+
     data = load_data()
 
-    if is_numeric_column(data):
-        figure, axis = plot_numeric_column(data)
-        plot_type = "numeric yearly mean"
-    else:
-        figure, axis = plot_categorical_column(data)
-        plot_type = "categorical yearly share"
+    figure, left_axis, right_axis, left_type, right_type = plot_two_columns(data)
 
-    axis.grid(True, alpha=0.3)
     figure.tight_layout()
 
     output_file = (
         OUTPUT_DIR
-        / f"{make_safe_filename(VALUE_COLUMN)}.png"
+        / f"{make_safe_filename(LEFT_VALUE_COLUMN)}__and__{make_safe_filename(RIGHT_VALUE_COLUMN)}.png"
     )
+
     figure.savefig(
         output_file,
         dpi=300,
         bbox_inches="tight",
     )
+
     plt.close(figure)
 
-    print(f"Plot type: {plot_type}")
+    print(f"Left column: {LEFT_VALUE_COLUMN}")
+    print(f"Left plot type: {left_type}")
+    print(f"Right column: {RIGHT_VALUE_COLUMN}")
+    print(f"Right plot type: {right_type}")
     print(f"Saved figure to: {output_file}")
 
 

@@ -1,5 +1,5 @@
 """
-Step 3 (Batch): Assign each unique topic phrase to one taxonomy category.
+Step 3 (Batch, single-submit): Assign each unique topic phrase to one taxonomy category.
 
 Place and run this script inside:
     work_1953_1993/Gemini
@@ -93,7 +93,7 @@ def load_taxonomy(path: Path) -> tuple[list[str], str]:
     body = "\n".join(lines)
 
     instruction = f"""\
-You are a research assistant labelling topical descriptions of speeches in the Canadian House of Commons, 1953-1993.
+You are a research assistant labelling topical descriptions of speeches in the Canadian House of Commons, 1963-1993.
 Each input item is a short noun phrase describing one speech topic.
 Assign EXACTLY ONE category from the list below to each item.
 
@@ -109,6 +109,7 @@ Return a JSON array of the same length where each element is the chosen category
 Use exact strings from the category list. Preserve the input order. Do not return anything else.
 """
     return names, instruction
+    
 
 
 def load_done(path: Path) -> set[str]:
@@ -142,6 +143,16 @@ def response_schema(category_names: list[str]) -> dict[str, Any]:
 
 
 def build_request(batch: list[str], system_instruction: str, category_names: list[str]) -> dict[str, Any]:
+    """Build one JSONL request line for the Gemini Batch API.
+
+    This follows the same file-based Batch API shape used in Step 1:
+    - ``contents`` is a top-level request field.
+    - ``system_instruction`` is a top-level request field.
+    - generation settings go inside ``generation_config``.
+
+    Important: do not put ``system_instruction`` inside ``generation_config``
+    and do not use the Python SDK keyword name ``config`` inside JSONL.
+    """
     prompt = json.dumps(batch, ensure_ascii=False)
     return {
         "contents": [
@@ -150,8 +161,10 @@ def build_request(batch: list[str], system_instruction: str, category_names: lis
                 "parts": [{"text": prompt}],
             }
         ],
+        "system_instruction": {
+            "parts": [{"text": system_instruction}],
+        },
         "generation_config": {
-            "system_instruction": {"parts": [{"text": system_instruction}]},
             "temperature": TEMPERATURE,
             "response_mime_type": "application/json",
             "response_schema": response_schema(category_names),
@@ -179,19 +192,26 @@ def make_jsonl(args: argparse.Namespace) -> None:
 
 
 def object_to_jsonable(obj: Any) -> Any:
+    """Convert Google SDK objects into plain JSON-safe Python values."""
+    if isinstance(obj, datetime):
+        return obj.isoformat()
+    if isinstance(obj, Path):
+        return str(obj)
+    if isinstance(obj, (str, int, float, bool)) or obj is None:
+        return obj
+    if isinstance(obj, (list, tuple)):
+        return [object_to_jsonable(x) for x in obj]
+    if isinstance(obj, dict):
+        return {str(k): object_to_jsonable(v) for k, v in obj.items()}
     for method in ("model_dump", "to_json_dict"):
         if hasattr(obj, method):
             try:
-                return getattr(obj, method)()
+                return object_to_jsonable(getattr(obj, method)())
             except Exception:
                 pass
     if hasattr(obj, "__dict__"):
         return {k: object_to_jsonable(v) for k, v in vars(obj).items() if not k.startswith("_")}
-    if isinstance(obj, (list, tuple)):
-        return [object_to_jsonable(x) for x in obj]
-    if isinstance(obj, dict):
-        return {k: object_to_jsonable(v) for k, v in obj.items()}
-    return obj
+    return str(obj)
 
 
 def submit(args: argparse.Namespace) -> None:
@@ -210,7 +230,7 @@ def submit(args: argparse.Namespace) -> None:
     batch_job = client.batches.create(
         model=args.model,
         src=uploaded_file.name,
-        generation_config={"display_name": args.display_name},
+        config={"display_name": args.display_name},
     )
     print(f"Created batch job: {batch_job.name}")
 
