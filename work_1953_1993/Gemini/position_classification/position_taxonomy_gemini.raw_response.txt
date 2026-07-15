@@ -1,0 +1,105 @@
+{
+  "taxonomy": [
+    {
+      "category_id": "government_minister",
+      "category_label": "Government Minister",
+      "definition": "Holds a portfolio within the executive branch of government, responsible for a specific department or area of policy. This includes ministers, associate ministers, deputy ministers, and ministers of state.",
+      "inclusion_rule": "Positions that include 'Minister', 'Associate Minister', 'Deputy Prime Minister' (when also a minister), 'Minister of State', or 'Secretary of State' (when also a minister).",
+      "exclusion_rule": "Positions that are solely procedural or legislative leadership roles, or roles related to the Speaker's office.",
+      "institutional_role_basis": "These individuals are part of the executive government, responsible for policy implementation and administration.",
+      "examples": [
+        "Minister of Agriculture",
+        "Associate Minister of National Defence",
+        "Deputy Prime Minister; Minister of Finance",
+        "Minister of State (Environment)",
+        "Secretary of State of Canada"
+      ]
+    },
+    {
+      "category_id": "government_house_leader",
+      "category_label": "Government House Leader",
+      "definition": "Responsible for managing the government's legislative agenda and business in the House of Commons or Senate. This includes the Leader of the Government in the House of Commons and their deputies.",
+      "inclusion_rule": "Positions that include 'Leader of the Government in the House of Commons', 'Deputy Leader of the Government in the House of Commons', or 'Government House Leader'.",
+      "exclusion_rule": "Positions that are solely ministerial or party leadership roles not directly tied to managing government business in the House.",
+      "institutional_role_basis": "These roles are specifically tasked with the procedural management of government legislation and debate within the parliamentary chamber.",
+      "examples": [
+        "Leader of the Government in the House of Commons",
+        "Deputy Leader of the Government in the House of Commons",
+        "Minister of State (Government House Leader)"
+      ]
+    },
+    {
+      "category_id": "opposition_house_leader",
+      "category_label": "Opposition House Leader",
+      "definition": "Responsible for managing the opposition's legislative agenda and business in the House of Commons or Senate. This includes the Leader of the Official Opposition and their deputies.",
+      "inclusion_rule": "Positions that include 'Leader of the Official Opposition', 'Official Opposition House Leader', 'Deputy House Leader of the Official Opposition', or 'Leader of the Opposition in the Senate', 'Deputy Leader of the Opposition in the Senate'.",
+      "exclusion_rule": "Positions that are solely party leadership roles not directly tied to managing opposition business in the House, or roles of government leaders.",
+      "institutional_role_basis": "These roles are specifically tasked with the procedural management of opposition strategy and debate within the parliamentary chamber.",
+      "examples": [
+        "Leader of the Official Opposition",
+        "Official Opposition House Leader",
+        "Deputy House Leader of the Official Opposition"
+      ]
+    },
+    {
+      "category_id": "party_whip",
+      "category_label": "Party Whip",
+      "definition": "Responsible for party discipline, ensuring members attend votes, and managing party communications within the House. This includes Chief Whips, Deputy Whips, and Caucus Chairs.",
+      "inclusion_rule": "Positions that include 'Whip', 'Deputy Whip', 'Chief Whip', 'Caucus Chair', 'Caucus Vice-Chair', 'House Leader' (for opposition parties), or 'Parliamentary Leader'.",
+      "exclusion_rule": "Positions that are solely ministerial, Speaker roles, or government house leadership roles.",
+      "institutional_role_basis": "These roles are central to party organization and discipline within the parliamentary setting.",
+      "examples": [
+        "Chief Government Whip",
+        "Whip of the Liberal Party",
+        "Bloc Québécois Caucus Chair",
+        "N.D.P. House Leader",
+        "Deputy Opposition Whip"
+      ]
+    },
+    {
+      "category_id": "parliamentary_secretary",
+      "category_label": "Parliamentary Secretary",
+      "definition": "Assists a minister or parliamentary leader, often acting as a liaison between ministers and backbenchers or performing specific delegated tasks. These roles are supportive of the executive but not full ministerial rank.",
+      "inclusion_rule": "Positions that include 'Parliamentary Secretary'.",
+      "exclusion_rule": "Positions that are full ministerial roles, or roles of party leadership or whips.",
+      "institutional_role_basis": "These are distinct roles that support the executive branch and legislative process without holding ministerial portfolios.",
+      "examples": [
+        "Parliamentary Secretary to the Minister of Finance",
+        "Parliamentary Secretary to the Leader of the Government in the House of Commons",
+        "Parliamentary Secretary to the Deputy Prime Minister"
+      ]
+    },
+    {
+      "category_id": "presiding_officer",
+      "category_label": "Presiding Officer",
+      "definition": "Responsible for maintaining order and decorum during parliamentary proceedings, and for interpreting and applying the rules of the House. This includes the Speaker and Deputy Speakers.",
+      "inclusion_rule": "Positions that include 'Speaker', 'Chair of Committees of the Whole', 'Deputy Speaker', or 'Assistant Deputy Chair of Committees of the Whole'.",
+      "exclusion_rule": "Positions related to party leadership, whips, or ministerial roles.",
+      "institutional_role_basis": "These roles are neutral arbiters of parliamentary procedure, distinct from partisan political roles.",
+      "examples": [
+        "Speaker of the House of Commons",
+        "Deputy Speaker and Chair of Committees of the Whole of the House of Commons",
+        "Assistant Deputy Chair of Committees of the Whole"
+      ]
+    },
+    {
+      "category_id": "ordinary_member",
+      "category_label": "Ordinary Member",
+      "definition": "A Member of Parliament or Senator who does not hold a specific leadership, ministerial, whip, or presiding officer role. This category is for members whose titles do not indicate a special parliamentary function beyond their general membership.",
+      "inclusion_rule": "Any position that does not fit into the above categories and does not explicitly denote a leadership, ministerial, whip, or presiding role. This would typically be a backbencher.",
+      "exclusion_rule": "All positions that fall into the other defined categories.",
+      "institutional_role_basis": "Represents the general membership of the legislative body, distinct from those with specific procedural, executive, or party management responsibilities.",
+      "examples": []
+    }
+  ],
+  "priority_rule": [
+    "presiding_officer",
+    "government_minister",
+    "government_house_leader",
+    "opposition_house_leader",
+    "party_whip",
+    "parliamentary_secretary",
+    "ordinary_member"
+  ],
+  "brief_rationale": "This taxonomy categorizes speakers based on their formal institutional roles in parliamentary proceedings, distinguishing between executive (ministers), procedural management (house leaders, whips), support (parliamentary secretaries), and neutrality (presiding officers). The 'ordinary member' category captures those without specific defined roles. The priority rule ensures that the most distinct and formal roles are prioritized when a speaker holds multiple titles."
+}

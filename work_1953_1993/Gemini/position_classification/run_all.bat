@@ -1,0 +1,5 @@
+@echo off
+python 01_extract_unique_positions.py
+python 02_discover_position_taxonomy_gemini.py
+python 03_classify_positions_with_taxonomy_gemini.py
+pause

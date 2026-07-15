@@ -1,0 +1,79 @@
+{
+  "metadata": {
+    "coding_scheme": "manual_simplified_position_function_taxonomy",
+    "purpose": "Classify speakerposition values into broad institutional role functions before deriving frontbench/backbench status.",
+    "notes": "This taxonomy is designed for 03_classify_positions_with_taxonomy_gemini.py. It intentionally does not fully determine government/opposition frontbench/backbench status. That should be derived later using speechdate and speakerparty."
+  },
+  "taxonomy": [
+    {
+      "category_id": "1",
+      "category_label": "Presiding officer",
+      "definition": "Positions formally responsible for presiding over parliamentary proceedings, maintaining order, or chairing debate.",
+      "inclusion_rule": "Include titles containing Speaker, Deputy Speaker, Speaker pro tempore, Chair of Committees of the Whole, Deputy Chair of Committees of the Whole, Assistant Deputy Chair of Committees of the Whole, or equivalent presiding-office titles.",
+      "exclusion_rule": "Do not include ministers, House Leaders, Whips, Parliamentary Secretaries, caucus chairs, or party leaders unless the title also contains a presiding-office title.",
+      "institutional_role_basis": "These positions are grouped together because their formal role is to chair or regulate proceedings rather than to represent government, opposition, party, or department in debate.",
+      "examples": [
+        "Speaker of the House of Commons",
+        "Deputy Speaker and Chair of Committees of the Whole of the House of Commons",
+        "Assistant Deputy Chair of Committees of the Whole",
+        "Speaker pro tempore",
+        "Speaker of the Senate"
+      ]
+    },
+    {
+      "category_id": "2",
+      "category_label": "Government office",
+      "definition": "Government-side executive, ministerial, junior ministerial, or government agenda-management positions.",
+      "inclusion_rule": "Include titles containing Prime Minister, Deputy Prime Minister, Minister of, Minister for, Minister responsible for, Secretary of State, Solicitor General, President of the Privy Council, President of the Treasury Board, Postmaster General, Registrar General, Parliamentary Secretary, Parliamentary Assistant, Minister of State, Associate Minister, Minister Without Portfolio, Leader of the Government in the House of Commons, Government House Leader, Chief Government Whip, Government Whip, or equivalent government-side offices.",
+      "exclusion_rule": "Do not include opposition leadership, party caucus roles, party House Leaders, party Whips, or ordinary members unless the title also contains a government office. Do not classify by ministerial department or policy field.",
+      "institutional_role_basis": "These positions are grouped together because they indicate formal government-side office, either in executive leadership, ministerial responsibility, junior government support, or management of government business in Parliament.",
+      "examples": [
+        "Prime Minister",
+        "Deputy Prime Minister; Minister of Finance",
+        "Minister of Finance",
+        "Minister of Justice and Attorney General of Canada",
+        "Parliamentary Secretary to the Minister of Finance",
+        "Minister of State (Transport)",
+        "Leader of the Government in the House of Commons",
+        "Chief Government Whip"
+      ]
+    },
+    {
+      "category_id": "3",
+      "category_label": "Party or opposition management",
+      "definition": "Opposition leadership, opposition-side parliamentary management, and internal party or caucus management roles.",
+      "inclusion_rule": "Include titles containing Leader of the Official Opposition, Leader of the Opposition, Deputy Leader of the Opposition, Official Opposition House Leader, Deputy House Leader of the Official Opposition, Chief Opposition Whip, Deputy Opposition Whip, Leader of the Opposition in the Senate, party House Leader, party Deputy House Leader, party Whip, Deputy Whip, Caucus Chair, Caucus Vice-Chair, Parliamentary Leader, or similar party/caucus management roles.",
+      "exclusion_rule": "Do not include government ministers, Parliamentary Secretaries, Government House Leaders, Government Whips, or presiding officers when those higher-priority roles are present in the title.",
+      "institutional_role_basis": "These positions are grouped together because they indicate organized parliamentary leadership, party coordination, opposition leadership, caucus management, or party-side legislative strategy rather than ordinary membership.",
+      "examples": [
+        "Leader of the Official Opposition",
+        "Official Opposition House Leader",
+        "Chief Opposition Whip",
+        "N.D.P. House Leader",
+        "Whip of the Liberal Party",
+        "Liberal Party Caucus Chair",
+        "Parliamentary Leader of the N.D.P."
+      ]
+    },
+    {
+      "category_id": "4",
+      "category_label": "Ordinary or other role",
+      "definition": "Residual category for ordinary members, missing or unclear positions, and special titles that do not clearly fit the other institutional role categories.",
+      "inclusion_rule": "Include ordinary members without a clear special office, empty or missing speakerposition values, and residual titles that do not clearly indicate presiding office, government office, party management, or opposition management.",
+      "exclusion_rule": "Do not use this category if the title clearly contains a presiding, government, opposition leadership, party management, or caucus management role.",
+      "institutional_role_basis": "This category preserves a baseline group for speakers without a clearly identifiable special institutional office in the position field.",
+      "examples": [
+        "Vice-President",
+        "Unclear special title",
+        "Empty speakerposition"
+      ]
+    }
+  ],
+  "priority_rule": [
+    "1",
+    "2",
+    "3",
+    "4"
+  ],
+  "brief_rationale": "This taxonomy classifies speaker positions by broad formal institutional function rather than by party name, province, electoral district, policy field, ministerial department, ideology, or speech outcomes. It is intentionally simple: presiding officers are separated from government offices, party/opposition management roles, and ordinary or residual roles. Final frontbench/backbench status should be derived in a later step by combining this position function with speakerparty and speechdate."
+}
