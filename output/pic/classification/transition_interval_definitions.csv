@@ -1,0 +1,4 @@
+﻿interval_label,chunk_min_inclusive,chunk_max_exclusive
+2-6,2,6
+6-10,6,10
+10+,10,inf

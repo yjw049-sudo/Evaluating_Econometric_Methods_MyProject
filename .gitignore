@@ -1,5 +1,4 @@
 # Large source and generated data kept locally
-input/lipad/
 output/processed_data/
 output/1920-1949-v1/
 output/1920-1949-full-corpus-v1/
@@ -16,8 +15,8 @@ work_1953_1993/output/yearly_three_indicators/
 work_1953_1993/output/temp_pic/
 work_1953_1993/temp.ipynb
 others
-output\*
-!output\pic
+output/*
+!output/pic
 Gemini
 essay
 草稿_论文框架重写版.md
@@ -25,5 +24,5 @@ essay
 work_1953_1993_代码文件说明.md
 .vscode
 tmp
-src\check_csv.py
+src/check_csv.py
 Kmeans

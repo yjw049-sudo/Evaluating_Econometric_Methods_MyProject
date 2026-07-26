@@ -1,0 +1,7 @@
+google-genai
+matplotlib
+nltk
+numpy
+openpyxl
+pandas
+statsmodels

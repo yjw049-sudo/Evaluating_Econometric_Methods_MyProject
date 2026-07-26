@@ -21,12 +21,12 @@ The project asks:
 These results suggest that LLM and K-means are sensitive to text length and input construction in different ways.
 
 ## Repository Structure
-
 ```text
 .
 ├── input/
 │   └── Parliamentarians.xlsx   # Parliamentarian metadata used during data merging
-├── src/                        # Data processing, sampling, stemming, merging, and analysis scripts
+│   └── Lipad                   # Speeches for 1963–1993
+├── src/                        # Data processing, sampling, stemming, merging, and analysis 
 ├── Gemini_merged/              # Gemini workflow and saved results for full speeches
 ├── Gemini_chunk/               # Gemini workflow and saved results for chunked speeches
 ├── output/                     # Processed datasets, descriptive statistics, figures, and tables
@@ -41,14 +41,13 @@ classification, taxonomy induction, category assignment, output merging, and
 K-means cluster scoring. Their `batch_parts/` and related subdirectories contain
 batch request, status, result, and manifest files retained for reproducibility.
 
-Large LIPAD source files, K-means working files, and other local materials are
-excluded through `.gitignore`; the retained files in `output/` provide the main
-processed datasets and analysis results.
 
 ## Data
 
 The project uses Canadian House of Commons speeches for 1963–1993. 
+
 `input\lipad`
+
 `input\Parliamentarians.xlsx`
 
 ## Analysis Workflow
@@ -82,6 +81,28 @@ The project uses Canadian House of Commons speeches for 1963–1993.
 4. Analyze category and cluster stability.
 5. Analyze LLM positional sensitivity.
 
-## Execution Order
-Run `runall_order.md`
+## How to Run
+Run `src\run_all.py`
 
+See `runall_order.md`
+
+> **Note:** The current `src/run_all.py` workflow uses the Gemini results
+> already stored in `Gemini_merged/` and `Gemini_chunk/`. It only merges those
+> saved results into the processed datasets and does not call the Gemini API
+> again.
+>
+> To regenerate the Gemini results, add the API key to a `.env` file:
+>
+> ```dotenv
+> GEMINI_API_KEY=your_api_key
+> ```
+>
+> Then run the generation steps in `Gemini_merged/README_run_order.txt`,
+> followed by those in `Gemini_chunk/README_run_order.txt`. Follow the command
+> order documented in each file; these steps submit API requests and replace or
+> update the saved Gemini outputs used by `src/run_all.py`.
+
+## Main Outputs
+Key figures are stored in:
+- `output\pic`
+- `output\descriptive.csv`

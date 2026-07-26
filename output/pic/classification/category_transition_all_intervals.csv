@@ -1,0 +1,301 @@
+﻿interval_label,original_category,chunk_category,weighted_row_share
+2-6,Agriculture & Natural Resources,Agriculture & Natural Resources,0.7373952288845906
+2-6,Agriculture & Natural Resources,Economic & Fiscal Policy,0.05122501611863314
+2-6,Agriculture & Natural Resources,Foreign Affairs & Defence,0.01673920051579626
+2-6,Agriculture & Natural Resources,Government Operations & Ethics,0.03234203739522889
+2-6,Agriculture & Natural Resources,Indigenous & Northern Affairs,0.004094132817537073
+2-6,Agriculture & Natural Resources,Intergovernmental & Constitutional Affairs,0.023581560283687943
+2-6,Agriculture & Natural Resources,"Justice, Rights & Immigration",0.002498388136686009
+2-6,Agriculture & Natural Resources,Parliamentary Affairs,0.0393214055448098
+2-6,Agriculture & Natural Resources,Social Policy,0.025636686009026435
+2-6,Agriculture & Natural Resources,Trade & Industry,0.06716634429400387
+2-6,Economic & Fiscal Policy,Agriculture & Natural Resources,0.032751937984496125
+2-6,Economic & Fiscal Policy,Economic & Fiscal Policy,0.7190826873385013
+2-6,Economic & Fiscal Policy,Foreign Affairs & Defence,0.005348837209302325
+2-6,Economic & Fiscal Policy,Government Operations & Ethics,0.0422609819121447
+2-6,Economic & Fiscal Policy,Indigenous & Northern Affairs,0.0009948320413436691
+2-6,Economic & Fiscal Policy,Intergovernmental & Constitutional Affairs,0.020878552971576227
+2-6,Economic & Fiscal Policy,"Justice, Rights & Immigration",0.0057105943152454776
+2-6,Economic & Fiscal Policy,Parliamentary Affairs,0.04722222222222222
+2-6,Economic & Fiscal Policy,Social Policy,0.06353359173126615
+2-6,Economic & Fiscal Policy,Trade & Industry,0.062215762273901805
+2-6,Foreign Affairs & Defence,Agriculture & Natural Resources,0.025743048897411316
+2-6,Foreign Affairs & Defence,Economic & Fiscal Policy,0.006743368488334931
+2-6,Foreign Affairs & Defence,Foreign Affairs & Defence,0.8120166187280281
+2-6,Foreign Affairs & Defence,Government Operations & Ethics,0.04464685202940236
+2-6,Foreign Affairs & Defence,Indigenous & Northern Affairs,0.0019175455417066154
+2-6,Foreign Affairs & Defence,Intergovernmental & Constitutional Affairs,0.009076382230744647
+2-6,Foreign Affairs & Defence,"Justice, Rights & Immigration",0.021620325982742092
+2-6,Foreign Affairs & Defence,Parliamentary Affairs,0.030936401406200062
+2-6,Foreign Affairs & Defence,Social Policy,0.019974432726110578
+2-6,Foreign Affairs & Defence,Trade & Industry,0.02732502396931927
+2-6,Government Operations & Ethics,Agriculture & Natural Resources,0.024331597222222223
+2-6,Government Operations & Ethics,Economic & Fiscal Policy,0.051467013888888885
+2-6,Government Operations & Ethics,Foreign Affairs & Defence,0.016788194444444446
+2-6,Government Operations & Ethics,Government Operations & Ethics,0.6290364583333333
+2-6,Government Operations & Ethics,Indigenous & Northern Affairs,0.004314236111111111
+2-6,Government Operations & Ethics,Intergovernmental & Constitutional Affairs,0.0153125
+2-6,Government Operations & Ethics,"Justice, Rights & Immigration",0.029140625
+2-6,Government Operations & Ethics,Parliamentary Affairs,0.10284722222222223
+2-6,Government Operations & Ethics,Social Policy,0.054982638888888886
+2-6,Government Operations & Ethics,Trade & Industry,0.07177951388888888
+2-6,Indigenous & Northern Affairs,Agriculture & Natural Resources,0.03152289669861555
+2-6,Indigenous & Northern Affairs,Economic & Fiscal Policy,0.008359957401490948
+2-6,Indigenous & Northern Affairs,Foreign Affairs & Defence,0.0059105431309904154
+2-6,Indigenous & Northern Affairs,Government Operations & Ethics,0.049148029818956336
+2-6,Indigenous & Northern Affairs,Indigenous & Northern Affairs,0.7175186368477103
+2-6,Indigenous & Northern Affairs,Intergovernmental & Constitutional Affairs,0.04717784877529286
+2-6,Indigenous & Northern Affairs,"Justice, Rights & Immigration",0.02476038338658147
+2-6,Indigenous & Northern Affairs,Parliamentary Affairs,0.03966986155484558
+2-6,Indigenous & Northern Affairs,Social Policy,0.06693290734824281
+2-6,Indigenous & Northern Affairs,Trade & Industry,0.008998935037273694
+2-6,Intergovernmental & Constitutional Affairs,Agriculture & Natural Resources,0.03410138248847927
+2-6,Intergovernmental & Constitutional Affairs,Economic & Fiscal Policy,0.0701804915514593
+2-6,Intergovernmental & Constitutional Affairs,Foreign Affairs & Defence,0.026420890937019974
+2-6,Intergovernmental & Constitutional Affairs,Government Operations & Ethics,0.044873271889400934
+2-6,Intergovernmental & Constitutional Affairs,Indigenous & Northern Affairs,0.018682795698924736
+2-6,Intergovernmental & Constitutional Affairs,Intergovernmental & Constitutional Affairs,0.5735407066052228
+2-6,Intergovernmental & Constitutional Affairs,"Justice, Rights & Immigration",0.030741167434715826
+2-6,Intergovernmental & Constitutional Affairs,Parliamentary Affairs,0.10464669738863289
+2-6,Intergovernmental & Constitutional Affairs,Social Policy,0.053974654377880196
+2-6,Intergovernmental & Constitutional Affairs,Trade & Industry,0.04283794162826421
+2-6,"Justice, Rights & Immigration",Agriculture & Natural Resources,0.004988851727982162
+2-6,"Justice, Rights & Immigration",Economic & Fiscal Policy,0.013224637681159418
+2-6,"Justice, Rights & Immigration",Foreign Affairs & Defence,0.023369565217391298
+2-6,"Justice, Rights & Immigration",Government Operations & Ethics,0.05624303232998884
+2-6,"Justice, Rights & Immigration",Indigenous & Northern Affairs,0.0057274247491638786
+2-6,"Justice, Rights & Immigration",Intergovernmental & Constitutional Affairs,0.02977982162764771
+2-6,"Justice, Rights & Immigration","Justice, Rights & Immigration",0.703483835005574
+2-6,"Justice, Rights & Immigration",Parliamentary Affairs,0.08988294314381269
+2-6,"Justice, Rights & Immigration",Social Policy,0.04786789297658862
+2-6,"Justice, Rights & Immigration",Trade & Industry,0.02543199554069119
+2-6,Parliamentary Affairs,Agriculture & Natural Resources,0.013951789627465305
+2-6,Parliamentary Affairs,Economic & Fiscal Policy,0.025383491599707816
+2-6,Parliamentary Affairs,Foreign Affairs & Defence,0.009508156805454103
+2-6,Parliamentary Affairs,Government Operations & Ethics,0.07078159240321404
+2-6,Parliamentary Affairs,Indigenous & Northern Affairs,0.001893109325541758
+2-6,Parliamentary Affairs,Intergovernmental & Constitutional Affairs,0.029650596542488437
+2-6,Parliamentary Affairs,"Justice, Rights & Immigration",0.01908935962990017
+2-6,Parliamentary Affairs,Parliamentary Affairs,0.7897918188458728
+2-6,Parliamentary Affairs,Social Policy,0.02119551984416849
+2-6,Parliamentary Affairs,Trade & Industry,0.018754565376187
+2-6,Social Policy,Agriculture & Natural Resources,0.01053033776555097
+2-6,Social Policy,Economic & Fiscal Policy,0.07229863976769066
+2-6,Social Policy,Foreign Affairs & Defence,0.006312089255693106
+2-6,Social Policy,Government Operations & Ethics,0.04347394161699526
+2-6,Social Policy,Indigenous & Northern Affairs,0.003950787100718325
+2-6,Social Policy,Intergovernmental & Constitutional Affairs,0.019073819348922515
+2-6,Social Policy,"Justice, Rights & Immigration",0.019035610576188293
+2-6,Social Policy,Parliamentary Affairs,0.04449793672627235
+2-6,Social Policy,Social Policy,0.750588415100107
+2-6,Social Policy,Trade & Industry,0.03023842274186153
+2-6,Trade & Industry,Agriculture & Natural Resources,0.07249316317228806
+2-6,Trade & Industry,Economic & Fiscal Policy,0.0695913096323306
+2-6,Trade & Industry,Foreign Affairs & Defence,0.01869492555454269
+2-6,Trade & Industry,Government Operations & Ethics,0.06813278638711637
+2-6,Trade & Industry,Indigenous & Northern Affairs,0.0016864175022789423
+2-6,Trade & Industry,Intergovernmental & Constitutional Affairs,0.016826192646611973
+2-6,Trade & Industry,"Justice, Rights & Immigration",0.009328471589182619
+2-6,Trade & Industry,Parliamentary Affairs,0.0435278030993619
+2-6,Trade & Industry,Social Policy,0.03276359769067153
+2-6,Trade & Industry,Trade & Industry,0.6669553327256152
+6-10,Agriculture & Natural Resources,Agriculture & Natural Resources,0.7537805662805663
+6-10,Agriculture & Natural Resources,Economic & Fiscal Policy,0.04284641784641785
+6-10,Agriculture & Natural Resources,Foreign Affairs & Defence,0.0058987558987559
+6-10,Agriculture & Natural Resources,Government Operations & Ethics,0.024296618046618052
+6-10,Agriculture & Natural Resources,Indigenous & Northern Affairs,0.006081974831974832
+6-10,Agriculture & Natural Resources,Intergovernmental & Constitutional Affairs,0.024645180895180897
+6-10,Agriculture & Natural Resources,"Justice, Rights & Immigration",0.006256256256256257
+6-10,Agriculture & Natural Resources,Parliamentary Affairs,0.023469898469898474
+6-10,Agriculture & Natural Resources,Social Policy,0.024975868725868728
+6-10,Agriculture & Natural Resources,Trade & Industry,0.08774846274846275
+6-10,Economic & Fiscal Policy,Agriculture & Natural Resources,0.05013560280855878
+6-10,Economic & Fiscal Policy,Economic & Fiscal Policy,0.6754600512462148
+6-10,Economic & Fiscal Policy,Foreign Affairs & Defence,0.01112275797810389
+6-10,Economic & Fiscal Policy,Government Operations & Ethics,0.04956989784033809
+6-10,Economic & Fiscal Policy,Indigenous & Northern Affairs,0.0010191008618681574
+6-10,Economic & Fiscal Policy,Intergovernmental & Constitutional Affairs,0.023202222887757477
+6-10,Economic & Fiscal Policy,"Justice, Rights & Immigration",0.006027253668763103
+6-10,Economic & Fiscal Policy,Parliamentary Affairs,0.02830188679245283
+6-10,Economic & Fiscal Policy,Social Policy,0.0845936907257662
+6-10,Economic & Fiscal Policy,Trade & Industry,0.0705675351901767
+6-10,Foreign Affairs & Defence,Agriculture & Natural Resources,0.025592362548884293
+6-10,Foreign Affairs & Defence,Economic & Fiscal Policy,0.015700483091787443
+6-10,Foreign Affairs & Defence,Foreign Affairs & Defence,0.8255118472509778
+6-10,Foreign Affairs & Defence,Government Operations & Ethics,0.03702265930526801
+6-10,Foreign Affairs & Defence,Indigenous & Northern Affairs,0.002070393374741201
+6-10,Foreign Affairs & Defence,Intergovernmental & Constitutional Affairs,0.008799171842650104
+6-10,Foreign Affairs & Defence,"Justice, Rights & Immigration",0.01997066942719117
+6-10,Foreign Affairs & Defence,Parliamentary Affairs,0.03314067172762826
+6-10,Foreign Affairs & Defence,Social Policy,0.020286979526109965
+6-10,Foreign Affairs & Defence,Trade & Industry,0.011904761904761908
+6-10,Government Operations & Ethics,Agriculture & Natural Resources,0.020934280144806458
+6-10,Government Operations & Ethics,Economic & Fiscal Policy,0.05688526872737398
+6-10,Government Operations & Ethics,Foreign Affairs & Defence,0.018205235310498467
+6-10,Government Operations & Ethics,Government Operations & Ethics,0.6048663324979114
+6-10,Government Operations & Ethics,Indigenous & Northern Affairs,0.0068295739348370925
+6-10,Government Operations & Ethics,Intergovernmental & Constitutional Affairs,0.037921191868560286
+6-10,Government Operations & Ethics,"Justice, Rights & Immigration",0.04121414647730437
+6-10,Government Operations & Ethics,Parliamentary Affairs,0.07365636313004734
+6-10,Government Operations & Ethics,Social Policy,0.04211222500696185
+6-10,Government Operations & Ethics,Trade & Industry,0.09737538290169868
+6-10,Indigenous & Northern Affairs,Agriculture & Natural Resources,0.06610942249240122
+6-10,Indigenous & Northern Affairs,Economic & Fiscal Policy,0.021614319486659914
+6-10,Indigenous & Northern Affairs,Foreign Affairs & Defence,0.0
+6-10,Indigenous & Northern Affairs,Government Operations & Ethics,0.034278959810874705
+6-10,Indigenous & Northern Affairs,Indigenous & Northern Affairs,0.7488601823708207
+6-10,Indigenous & Northern Affairs,Intergovernmental & Constitutional Affairs,0.01802600472813239
+6-10,Indigenous & Northern Affairs,"Justice, Rights & Immigration",0.033603512326916586
+6-10,Indigenous & Northern Affairs,Parliamentary Affairs,0.02600472813238771
+6-10,Indigenous & Northern Affairs,Social Policy,0.03191489361702128
+6-10,Indigenous & Northern Affairs,Trade & Industry,0.01958797703478555
+6-10,Intergovernmental & Constitutional Affairs,Agriculture & Natural Resources,0.03322921577872073
+6-10,Intergovernmental & Constitutional Affairs,Economic & Fiscal Policy,0.07104549740688355
+6-10,Intergovernmental & Constitutional Affairs,Foreign Affairs & Defence,0.018564356435643567
+6-10,Intergovernmental & Constitutional Affairs,Government Operations & Ethics,0.053257111425428265
+6-10,Intergovernmental & Constitutional Affairs,Indigenous & Northern Affairs,0.01946801823039447
+6-10,Intergovernmental & Constitutional Affairs,Intergovernmental & Constitutional Affairs,0.5903858242967155
+6-10,Intergovernmental & Constitutional Affairs,"Justice, Rights & Immigration",0.028042982869715547
+6-10,Intergovernmental & Constitutional Affairs,Parliamentary Affairs,0.1066910262454817
+6-10,Intergovernmental & Constitutional Affairs,Social Policy,0.05550644350149301
+6-10,Intergovernmental & Constitutional Affairs,Trade & Industry,0.02380952380952381
+6-10,"Justice, Rights & Immigration",Agriculture & Natural Resources,0.004839149400218103
+6-10,"Justice, Rights & Immigration",Economic & Fiscal Policy,0.006512783230340482
+6-10,"Justice, Rights & Immigration",Foreign Affairs & Defence,0.011677571792075608
+6-10,"Justice, Rights & Immigration",Government Operations & Ethics,0.04357506361323155
+6-10,"Justice, Rights & Immigration",Indigenous & Northern Affairs,0.002362777171937477
+6-10,"Justice, Rights & Immigration",Intergovernmental & Constitutional Affairs,0.029936083848297587
+6-10,"Justice, Rights & Immigration","Justice, Rights & Immigration",0.7591178965224766
+6-10,"Justice, Rights & Immigration",Parliamentary Affairs,0.05766085059978189
+6-10,"Justice, Rights & Immigration",Social Policy,0.06212892281594572
+6-10,"Justice, Rights & Immigration",Trade & Industry,0.022188901005694896
+6-10,Parliamentary Affairs,Agriculture & Natural Resources,0.018675273139558853
+6-10,Parliamentary Affairs,Economic & Fiscal Policy,0.049429241393527105
+6-10,Parliamentary Affairs,Foreign Affairs & Defence,0.009720933828076685
+6-10,Parliamentary Affairs,Government Operations & Ethics,0.09390460729746444
+6-10,Parliamentary Affairs,Indigenous & Northern Affairs,0.0009469696969696969
+6-10,Parliamentary Affairs,Intergovernmental & Constitutional Affairs,0.05808080808080808
+6-10,Parliamentary Affairs,"Justice, Rights & Immigration",0.036564625850340135
+6-10,Parliamentary Affairs,Parliamentary Affairs,0.6877319109461966
+6-10,Parliamentary Affairs,Social Policy,0.022089517625231907
+6-10,Parliamentary Affairs,Trade & Industry,0.022856112141826427
+6-10,Social Policy,Agriculture & Natural Resources,0.014868394615230058
+6-10,Social Policy,Economic & Fiscal Policy,0.06977513227513227
+6-10,Social Policy,Foreign Affairs & Defence,0.008313240908177616
+6-10,Social Policy,Government Operations & Ethics,0.026124338624338623
+6-10,Social Policy,Indigenous & Northern Affairs,0.007421639541892706
+6-10,Social Policy,Intergovernmental & Constitutional Affairs,0.029879110575313103
+6-10,Social Policy,"Justice, Rights & Immigration",0.018966412162614694
+6-10,Social Policy,Parliamentary Affairs,0.04759393208760297
+6-10,Social Policy,Social Policy,0.7478233206081307
+6-10,Social Policy,Trade & Industry,0.029234478601567207
+6-10,Trade & Industry,Agriculture & Natural Resources,0.07612462743467109
+6-10,Trade & Industry,Economic & Fiscal Policy,0.08322069730366673
+6-10,Trade & Industry,Foreign Affairs & Defence,0.012662889027517847
+6-10,Trade & Industry,Government Operations & Ethics,0.06547619047619048
+6-10,Trade & Industry,Indigenous & Northern Affairs,0.0011523532265890345
+6-10,Trade & Industry,Intergovernmental & Constitutional Affairs,0.01782681777223262
+6-10,Trade & Industry,"Justice, Rights & Immigration",0.012675885492479378
+6-10,Trade & Industry,Parliamentary Affairs,0.04536632702571567
+6-10,Trade & Industry,Social Policy,0.041805295626256324
+6-10,Trade & Industry,Trade & Industry,0.6436889166146808
+10+,Agriculture & Natural Resources,Agriculture & Natural Resources,0.7198494448494449
+10+,Agriculture & Natural Resources,Economic & Fiscal Policy,0.06882906882906883
+10+,Agriculture & Natural Resources,Foreign Affairs & Defence,0.016727041727041727
+10+,Agriculture & Natural Resources,Government Operations & Ethics,0.02785937785937786
+10+,Agriculture & Natural Resources,Indigenous & Northern Affairs,0.00820980820980821
+10+,Agriculture & Natural Resources,Intergovernmental & Constitutional Affairs,0.037863712863712866
+10+,Agriculture & Natural Resources,"Justice, Rights & Immigration",0.006456831456831457
+10+,Agriculture & Natural Resources,Parliamentary Affairs,0.027583452583452586
+10+,Agriculture & Natural Resources,Social Policy,0.02662202662202662
+10+,Agriculture & Natural Resources,Trade & Industry,0.059999234999235006
+10+,Economic & Fiscal Policy,Agriculture & Natural Resources,0.0722275393604065
+10+,Economic & Fiscal Policy,Economic & Fiscal Policy,0.6413709833290253
+10+,Economic & Fiscal Policy,Foreign Affairs & Defence,0.012608079566121524
+10+,Economic & Fiscal Policy,Government Operations & Ethics,0.0391340594137797
+10+,Economic & Fiscal Policy,Indigenous & Northern Affairs,0.0045863227681409505
+10+,Economic & Fiscal Policy,Intergovernmental & Constitutional Affairs,0.02618162723057828
+10+,Economic & Fiscal Policy,"Justice, Rights & Immigration",0.004235740949027662
+10+,Economic & Fiscal Policy,Parliamentary Affairs,0.025503750328925157
+10+,Economic & Fiscal Policy,Social Policy,0.06918396289025659
+10+,Economic & Fiscal Policy,Trade & Industry,0.10496793416373836
+10+,Foreign Affairs & Defence,Agriculture & Natural Resources,0.0
+10+,Foreign Affairs & Defence,Economic & Fiscal Policy,0.048275667993977846
+10+,Foreign Affairs & Defence,Foreign Affairs & Defence,0.7966427938258922
+10+,Foreign Affairs & Defence,Government Operations & Ethics,0.03984184829255251
+10+,Foreign Affairs & Defence,Indigenous & Northern Affairs,0.0
+10+,Foreign Affairs & Defence,Intergovernmental & Constitutional Affairs,0.011502347417840373
+10+,Foreign Affairs & Defence,"Justice, Rights & Immigration",0.018142186452045603
+10+,Foreign Affairs & Defence,Parliamentary Affairs,0.03147040752674555
+10+,Foreign Affairs & Defence,Social Policy,0.017667543723881747
+10+,Foreign Affairs & Defence,Trade & Industry,0.03645720476706392
+10+,Government Operations & Ethics,Agriculture & Natural Resources,0.02950837041746133
+10+,Government Operations & Ethics,Economic & Fiscal Policy,0.06905367359912815
+10+,Government Operations & Ethics,Foreign Affairs & Defence,0.020620288802106986
+10+,Government Operations & Ethics,Government Operations & Ethics,0.5426562074289347
+10+,Government Operations & Ethics,Indigenous & Northern Affairs,0.0071740128558310376
+10+,Government Operations & Ethics,Intergovernmental & Constitutional Affairs,0.031079904943541306
+10+,Government Operations & Ethics,"Justice, Rights & Immigration",0.01391499914227187
+10+,Government Operations & Ethics,Parliamentary Affairs,0.1008549531276804
+10+,Government Operations & Ethics,Social Policy,0.057787540742086196
+10+,Government Operations & Ethics,Trade & Industry,0.12735004894095805
+10+,Indigenous & Northern Affairs,Agriculture & Natural Resources,0.04973359973359973
+10+,Indigenous & Northern Affairs,Economic & Fiscal Policy,0.007652347652347653
+10+,Indigenous & Northern Affairs,Foreign Affairs & Defence,0.005054945054945055
+10+,Indigenous & Northern Affairs,Government Operations & Ethics,0.03379905808477237
+10+,Indigenous & Northern Affairs,Indigenous & Northern Affairs,0.8359863945578231
+10+,Indigenous & Northern Affairs,Intergovernmental & Constitutional Affairs,0.037162837162837165
+10+,Indigenous & Northern Affairs,"Justice, Rights & Immigration",0.010917653774796632
+10+,Indigenous & Northern Affairs,Parliamentary Affairs,0.007835497835497834
+10+,Indigenous & Northern Affairs,Social Policy,0.009659863945578231
+10+,Indigenous & Northern Affairs,Trade & Industry,0.002197802197802198
+10+,Intergovernmental & Constitutional Affairs,Agriculture & Natural Resources,0.07777416036344607
+10+,Intergovernmental & Constitutional Affairs,Economic & Fiscal Policy,0.07960268897768898
+10+,Intergovernmental & Constitutional Affairs,Foreign Affairs & Defence,0.009199877503448932
+10+,Intergovernmental & Constitutional Affairs,Government Operations & Ethics,0.05806678440607012
+10+,Intergovernmental & Constitutional Affairs,Indigenous & Northern Affairs,0.03595065648637077
+10+,Intergovernmental & Constitutional Affairs,Intergovernmental & Constitutional Affairs,0.4974605751391466
+10+,Intergovernmental & Constitutional Affairs,"Justice, Rights & Immigration",0.04913182056039199
+10+,Intergovernmental & Constitutional Affairs,Parliamentary Affairs,0.09347349079491937
+10+,Intergovernmental & Constitutional Affairs,Social Policy,0.06951723871366729
+10+,Intergovernmental & Constitutional Affairs,Trade & Industry,0.029822707054849913
+10+,"Justice, Rights & Immigration",Agriculture & Natural Resources,0.011321619556913675
+10+,"Justice, Rights & Immigration",Economic & Fiscal Policy,0.01448904037139331
+10+,"Justice, Rights & Immigration",Foreign Affairs & Defence,0.010463653993065758
+10+,"Justice, Rights & Immigration",Government Operations & Ethics,0.03338485044367397
+10+,"Justice, Rights & Immigration",Indigenous & Northern Affairs,0.004432332373508844
+10+,"Justice, Rights & Immigration",Intergovernmental & Constitutional Affairs,0.008864272981920041
+10+,"Justice, Rights & Immigration","Justice, Rights & Immigration",0.7980340247987306
+10+,"Justice, Rights & Immigration",Parliamentary Affairs,0.04725460813696108
+10+,"Justice, Rights & Immigration",Social Policy,0.04907161465984995
+10+,"Justice, Rights & Immigration",Trade & Industry,0.022683982683982685
+10+,Parliamentary Affairs,Agriculture & Natural Resources,0.01657239819004525
+10+,Parliamentary Affairs,Economic & Fiscal Policy,0.023835110967463907
+10+,Parliamentary Affairs,Foreign Affairs & Defence,0.012810228986699576
+10+,Parliamentary Affairs,Government Operations & Ethics,0.0838820493232258
+10+,Parliamentary Affairs,Indigenous & Northern Affairs,0.0
+10+,Parliamentary Affairs,Intergovernmental & Constitutional Affairs,0.0902096677831972
+10+,Parliamentary Affairs,"Justice, Rights & Immigration",0.03299029401970579
+10+,Parliamentary Affairs,Parliamentary Affairs,0.6696558343617167
+10+,Parliamentary Affairs,Social Policy,0.03684354860825449
+10+,Parliamentary Affairs,Trade & Industry,0.033200867759691284
+10+,Social Policy,Agriculture & Natural Resources,0.009716390380452881
+10+,Social Policy,Economic & Fiscal Policy,0.08339115311771562
+10+,Social Policy,Foreign Affairs & Defence,0.009342350357975359
+10+,Social Policy,Government Operations & Ethics,0.02214920496170496
+10+,Social Policy,Indigenous & Northern Affairs,0.010228443431568432
+10+,Social Policy,Intergovernmental & Constitutional Affairs,0.02864752435064935
+10+,Social Policy,"Justice, Rights & Immigration",0.024479947136197135
+10+,Social Policy,Parliamentary Affairs,0.02665810751748252
+10+,Social Policy,Social Policy,0.7503246753246753
+10+,Social Policy,Trade & Industry,0.035062203421578425
+10+,Trade & Industry,Agriculture & Natural Resources,0.06052557198898663
+10+,Trade & Industry,Economic & Fiscal Policy,0.09207507939215256
+10+,Trade & Industry,Foreign Affairs & Defence,0.010813982765202278
+10+,Trade & Industry,Government Operations & Ethics,0.06457006408225921
+10+,Trade & Industry,Indigenous & Northern Affairs,0.0020808459832850077
+10+,Trade & Industry,Intergovernmental & Constitutional Affairs,0.019846332529259356
+10+,Trade & Industry,"Justice, Rights & Immigration",0.008465274562835539
+10+,Trade & Industry,Parliamentary Affairs,0.0370863283058405
+10+,Trade & Industry,Social Policy,0.032992860797738846
+10+,Trade & Industry,Trade & Industry,0.6715436595924401

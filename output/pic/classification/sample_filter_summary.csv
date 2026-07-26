@@ -1,0 +1,10 @@
+﻿metric,value
+initial_original_rows,59862
+initial_chunk_rows,124648
+matched_speeches_before_completeness_filter,21822
+incomplete_speeches_after_cleaning,1
+require_complete_chunks,True
+final_original_rows,21821
+final_chunk_rows,86604
+final_unique_speeches,21821
+final_sum_chunk_weights,21821.0
