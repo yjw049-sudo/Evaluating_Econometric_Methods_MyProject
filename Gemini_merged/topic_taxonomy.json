@@ -1,0 +1,109 @@
+{
+  "categories": [
+    {
+      "name": "Parliamentary Affairs",
+      "definition": "Covers the rules, procedures, and conduct of business within the House of Commons, including debates, points of order, privilege, committees, and the legislative process."
+    },
+    {
+      "name": "Economic & Fiscal Policy",
+      "definition": "Concerns the management of the national economy, including budgets, taxation (e.g., GST), inflation, interest rates, government spending, and the national debt."
+    },
+    {
+      "name": "Trade & Industry",
+      "definition": "Relates to domestic and international commerce, including trade agreements (e.g., Canada-US FTA), tariffs, foreign investment, support for specific industries, and corporate regulation."
+    },
+    {
+      "name": "Social Policy",
+      "definition": "Pertains to the social safety net and public services, including unemployment insurance, pensions, health care, post-secondary education, housing, and family benefits."
+    },
+    {
+      "name": "Justice, Rights & Immigration",
+      "definition": "Covers the legal system, civil liberties, and population management, including the Criminal Code, capital punishment, human rights, the Charter, immigration, and refugee policy."
+    },
+    {
+      "name": "Agriculture & Natural Resources",
+      "definition": "Focuses on primary industries and the environment, including farming, fisheries, forestry, energy policy (e.g., National Energy Program), and resource transportation."
+    },
+    {
+      "name": "Intergovernmental & Constitutional Affairs",
+      "definition": "Addresses the relationship between federal and provincial governments and the nation's foundational laws, including constitutional reform, federal transfers, and national unity."
+    },
+    {
+      "name": "Foreign Affairs & Defence",
+      "definition": "Concerns Canada's role and relationships in the world, including diplomacy, defence policy (e.g., NATO), the armed forces, international aid, and peacekeeping."
+    },
+    {
+      "name": "Government Operations & Ethics",
+      "definition": "Relates to the administration and accountability of the executive branch, including ministerial responsibility, Crown corporations, the public service, conflict of interest, and access to information."
+    },
+    {
+      "name": "Indigenous & Northern Affairs",
+      "definition": "Focuses on issues concerning First Nations, Inuit, and Métis peoples and the governance of Canada's territories, including land claims, treaty rights, and the Indian Act."
+    }
+  ],
+  "natural_n_categories": 12,
+  "natural_categories": [
+    {
+      "name": "Parliamentary Affairs",
+      "definition": "Covers the rules, procedures, and conduct of business within the House of Commons, including debates, points of order, privilege, committees, and the legislative process."
+    },
+    {
+      "name": "Economic & Fiscal Policy",
+      "definition": "Concerns the management of the national economy, including budgets, taxation, inflation, interest rates, government spending, and the national debt."
+    },
+    {
+      "name": "Trade & Industry",
+      "definition": "Relates to domestic and international commerce, including trade agreements, tariffs, foreign investment, support for specific industries, and corporate regulation."
+    },
+    {
+      "name": "Labour & Employment",
+      "definition": "Pertains to the workforce and labour market, including unemployment, job creation programs, unemployment insurance, and industrial relations."
+    },
+    {
+      "name": "Social Programs",
+      "definition": "Focuses on the social safety net and public services, including pensions, health care, post-secondary education, housing, and family benefits, excluding employment-specific programs."
+    },
+    {
+      "name": "Criminal Justice",
+      "definition": "Covers the system of law enforcement, courts, and corrections, including the Criminal Code, capital punishment, gun control, and policing."
+    },
+    {
+      "name": "Rights, Immigration & Citizenship",
+      "definition": "Addresses civil liberties, population management, and national identity, including the Charter of Rights, human rights, immigration, refugees, and official languages."
+    },
+    {
+      "name": "Agriculture & Natural Resources",
+      "definition": "Focuses on primary industries and the environment, including farming, fisheries, forestry, energy policy, and resource transportation."
+    },
+    {
+      "name": "Intergovernmental & Constitutional Affairs",
+      "definition": "Addresses the relationship between federal and provincial governments and the nation's foundational laws, including constitutional reform, federal transfers, and national unity."
+    },
+    {
+      "name": "Foreign Affairs & Defence",
+      "definition": "Concerns Canada's role and relationships in the world, including diplomacy, defence policy, the armed forces, international aid, and peacekeeping."
+    },
+    {
+      "name": "Government Operations & Ethics",
+      "definition": "Relates to the administration and accountability of the executive branch, including ministerial responsibility, Crown corporations, the public service, and conflict of interest."
+    },
+    {
+      "name": "Indigenous & Northern Affairs",
+      "definition": "Focuses on issues concerning First Nations, Inuit, and Métis peoples and the governance of Canada's territories, including land claims, treaty rights, and the Indian Act."
+    }
+  ],
+  "natural_rationale": "A 12-category taxonomy was chosen because the data reveals two very large and internally diverse policy domains in the 10-category model that benefit from being split. Separating 'Social Policy' into 'Labour & Employment' and 'Social Programs' isolates the recurring, high-frequency debates on unemployment and UI from other social issues like pensions and health. Similarly, splitting 'Justice, Rights & Immigration' into 'Criminal Justice' and 'Rights, Immigration & Citizenship' distinguishes debates about law and order from those concerning fundamental rights, immigration, and national identity, reflecting major, distinct streams of parliamentary discussion.",
+  "metadata": {
+    "input_path": "E:\\study\\S2\\Evaluating-Econometric-Methods_data\\Evaluating_Econometric_Methods_MyProject\\Gemini_merged\\speeches_topics_procedural.csv",
+    "n_speeches_with_topic": 59861,
+    "n_unique_topics": 54302,
+    "top_n_requested": 2000,
+    "top_n_used": 2000,
+    "top_n_coverage": 0.124488,
+    "procedural_filtering_used": false,
+    "created_at_utc": "2026-07-22T08:19:52.827464+00:00",
+    "model": "gemini-2.5-pro",
+    "fixed_n_categories_requested": 10,
+    "raw_response_path": "E:\\study\\S2\\Evaluating-Econometric-Methods_data\\Evaluating_Econometric_Methods_MyProject\\Gemini_merged\\topic_taxonomy.raw_response.txt"
+  }
+}

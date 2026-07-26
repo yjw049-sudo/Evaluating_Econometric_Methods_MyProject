@@ -1,0 +1,21 @@
+﻿cluster,top_words,cluster_score
+0,"tax,incom,incom tax,govern,sale tax,cent,canadian,financ,pay,sale,peopl,budget,increas,year,famili",0
+1,"amend,claus,act,motion,hous,propos,committe,order,word,follow,page,member,section,act amend,line page",1
+2,"indian,indian affair,northern develop,affair northern,northern,affair,develop,nativ,indian peopl,depart,peopl,band,question indian,govern,question",0.25
+3,"provinc,feder,govern,quebec,feder govern,provinci,program,canada,provinc quebec,agreement,ontario,question,provinci govern,year,feder provinci",0
+4,"question,govern,canada,hous,depart,ask,time,report,canadian,year,answer,inform,matter,make,like",0.5
+5,"cent,price,increas,rate,oil,govern,year,inflat,canadian,cost,canada,consum,energi,cent cent,industri",0
+6,"pension,age,old age,old,plan,pension plan,veteran,age pension,canada pension,incom,govern,age secur,secur,year,retir",0
+7,"unemploy,unemploy insur,insur,job,employ,peopl,govern,benefit,program,cent,work,rate,year,worker,question",0
+8,"solicitor,solicitor gener,gener,rcmp,question solicitor,question,polic,justic,hous,investig,matter,penitentiari,report,direct,secur",0.5
+9,"prime,question,govern,question prime,ask,deputi prime,deputi,hous,direct,ask prime,canada,right,act prime,canadian,view",0.75
+10,"hous,member,parti,leader,opposit,govern,debat,time,parliament,hous leader,want,liber,day,matter,common",0.75
+11,"servic,post,public,offic,post offic,public servic,treasuri board,treasuri,board,govern,depart,postal,canada,presid treasuri,employe",0
+12,"order,point order,motion,point,hous,question,stand order,chair,stand,member,rise,privileg,rise point,rule,debat",1
+13,"trade,free trade,free,agreement,industri,trade agreement,trade commerc,commerc,industri trade,canada,canadian,govern,question,state,american",0
+14,"secretari state,secretari,extern affair,extern,state extern,state,affair,question secretari,question,govern,canada,canadian,unit,direct,prime",0.5
+15,"committe,hous,report,stand committe,stand,member,refer,question,matter,govern,recommend,time,motion,order,parliament",0.75
+16,"govern,canadian,canada,peopl,countri,program,year,industri,develop,time,nation,job,want,work,mani",0
+17,"farmer,grain,wheat,farm,agricultur,wheat board,board,canadian wheat,western,produc,govern,price,year,canadian,market",0
+18,"unit,unit state,state,canada,canadian,govern,question,american,countri,export,agreement,trade,nation,canada unit,presid",0.25
+19,"bank,loan,busi,bank canada,small busi,small,rate,canada,financ,govern,charter bank,charter,act,canadian,money",0

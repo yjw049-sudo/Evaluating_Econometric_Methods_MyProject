@@ -1,0 +1,108 @@
+{
+  "clusters": [
+    {
+      "cluster": 0,
+      "procedural_score": 0.0
+    },
+    {
+      "cluster": 1,
+      "procedural_score": 1.0
+    },
+    {
+      "cluster": 2,
+      "procedural_score": 0.25
+    },
+    {
+      "cluster": 3,
+      "procedural_score": 0.0
+    },
+    {
+      "cluster": 4,
+      "procedural_score": 0.5
+    },
+    {
+      "cluster": 5,
+      "procedural_score": 0.0
+    },
+    {
+      "cluster": 6,
+      "procedural_score": 0.0
+    },
+    {
+      "cluster": 7,
+      "procedural_score": 0.0
+    },
+    {
+      "cluster": 8,
+      "procedural_score": 0.5
+    },
+    {
+      "cluster": 9,
+      "procedural_score": 0.75
+    },
+    {
+      "cluster": 10,
+      "procedural_score": 0.75
+    },
+    {
+      "cluster": 11,
+      "procedural_score": 0.0
+    },
+    {
+      "cluster": 12,
+      "procedural_score": 1.0
+    },
+    {
+      "cluster": 13,
+      "procedural_score": 0.0
+    },
+    {
+      "cluster": 14,
+      "procedural_score": 0.5
+    },
+    {
+      "cluster": 15,
+      "procedural_score": 0.75
+    },
+    {
+      "cluster": 16,
+      "procedural_score": 0.0
+    },
+    {
+      "cluster": 17,
+      "procedural_score": 0.0
+    },
+    {
+      "cluster": 18,
+      "procedural_score": 0.25
+    },
+    {
+      "cluster": 19,
+      "procedural_score": 0.0
+    }
+  ],
+  "notes": "",
+  "metadata": {
+    "input_path": "E:\\study\\S2\\Evaluating-Econometric-Methods_data\\Evaluating_Econometric_Methods_MyProject\\Kmeans\\Kmeans_merged\\cluster_summary.csv",
+    "output_csv": "E:\\study\\S2\\Evaluating-Econometric-Methods_data\\Evaluating_Econometric_Methods_MyProject\\Gemini_merged\\cluster_procedural_scores_gemini.csv",
+    "model": "gemini-2.5-flash-lite",
+    "temperature": 0.0,
+    "n_clusters": 20,
+    "source_columns": {
+      "cluster_col": "cluster",
+      "top_words_col": "top_words"
+    },
+    "prompt_columns_used": [
+      "cluster",
+      "top_words"
+    ],
+    "created_at_utc": "2026-07-22T10:04:51.084313+00:00",
+    "score_scale": [
+      0,
+      0.25,
+      0.5,
+      0.75,
+      1
+    ]
+  }
+}

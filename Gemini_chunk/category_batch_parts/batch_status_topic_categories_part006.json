@@ -1,0 +1,23 @@
+{
+  "name": "batches/uq50ruih8171dam8gav2sihn9e6uox7vv4pt",
+  "display_name": "topic-to-category-part006",
+  "state": "JOB_STATE_SUCCEEDED",
+  "error": null,
+  "create_time": "2026-07-22T15:39:12.857357+00:00",
+  "start_time": null,
+  "end_time": "2026-07-22T15:41:22.521656+00:00",
+  "update_time": "2026-07-22T15:41:22.521656+00:00",
+  "model": "models/gemini-2.5-flash-lite",
+  "src": null,
+  "dest": {
+    "format": null,
+    "gcs_uri": null,
+    "bigquery_uri": null,
+    "file_name": "files/batch-uq50ruih8171dam8gav2sihn9e6uox7vv4pt",
+    "inlined_responses": null,
+    "inlined_embed_content_responses": null,
+    "vertex_dataset": null
+  },
+  "completion_stats": null,
+  "output_info": null
+}

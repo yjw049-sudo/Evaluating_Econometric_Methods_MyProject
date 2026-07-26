@@ -1,0 +1,84 @@
+{
+  "clusters": [
+    {
+      "cluster": 0,
+      "procedural_score": "0"
+    },
+    {
+      "cluster": 1,
+      "procedural_score": "1"
+    },
+    {
+      "cluster": 2,
+      "procedural_score": "0.25"
+    },
+    {
+      "cluster": 3,
+      "procedural_score": "0"
+    },
+    {
+      "cluster": 4,
+      "procedural_score": "0.5"
+    },
+    {
+      "cluster": 5,
+      "procedural_score": "0"
+    },
+    {
+      "cluster": 6,
+      "procedural_score": "0"
+    },
+    {
+      "cluster": 7,
+      "procedural_score": "0"
+    },
+    {
+      "cluster": 8,
+      "procedural_score": "0.5"
+    },
+    {
+      "cluster": 9,
+      "procedural_score": "0.75"
+    },
+    {
+      "cluster": 10,
+      "procedural_score": "0.75"
+    },
+    {
+      "cluster": 11,
+      "procedural_score": "0"
+    },
+    {
+      "cluster": 12,
+      "procedural_score": "1"
+    },
+    {
+      "cluster": 13,
+      "procedural_score": "0"
+    },
+    {
+      "cluster": 14,
+      "procedural_score": "0.5"
+    },
+    {
+      "cluster": 15,
+      "procedural_score": "0.75"
+    },
+    {
+      "cluster": 16,
+      "procedural_score": "0"
+    },
+    {
+      "cluster": 17,
+      "procedural_score": "0"
+    },
+    {
+      "cluster": 18,
+      "procedural_score": "0.25"
+    },
+    {
+      "cluster": 19,
+      "procedural_score": "0"
+    }
+  ]
+}

@@ -1,0 +1,104 @@
+{
+"categories": [
+{
+"name": "Parliamentary Affairs",
+"definition": "Covers the rules, procedures, conduct, and business of the House of Commons, including debates, question period, points of order, privilege, and legislative processes."
+},
+{
+"name": "Economy and Public Finance",
+"definition": "Concerns macroeconomic policy, fiscal measures such as taxation and spending, the national debt, monetary policy, inflation, interest rates, and financial institutions."
+},
+{
+"name": "Social Policy",
+"definition": "Relates to the social safety net and public services, including pensions, unemployment insurance, health care, post-secondary education, housing, and family support."
+},
+{
+"name": "Justice and Human Rights",
+"definition": "Pertains to the legal system, criminal law (e.g., capital punishment, gun control), civil liberties, the Charter of Rights and Freedoms, and the administration of justice."
+},
+{
+"name": "Constitutional and Intergovernmental Relations",
+"definition": "Involves the Canadian constitution, federal-provincial-territorial relations, national unity, equalization, and institutional reform, including the Senate."
+},
+{
+"name": "Foreign Affairs, Trade, and Defence",
+"definition": "Encompasses Canada's international relations, trade agreements, foreign aid, national security, the armed forces, and participation in international organizations."
+},
+{
+"name": "Industry, Resources, and Agriculture",
+"definition": "Focuses on policies for specific economic sectors, including agriculture, energy, natural resources, fisheries, forestry, transportation, and communications."
+},
+{
+"name": "Government Operations",
+"definition": "Deals with the administration and machinery of government, including the public service, Crown corporations, government accountability, elections, and official information."
+},
+{
+"name": "Indigenous Affairs",
+"definition": "Covers policies, legislation, land claims, self-government, and relations concerning First Nations, Inuit, and Métis peoples."
+},
+{
+"name": "National Identity and Culture",
+"definition": "Includes issues related to national symbols like the flag, official languages, multiculturalism, broadcasting, arts, and Canadian heritage."
+}
+],
+"natural_n_categories": 14,
+"natural_categories": [
+{
+"name": "Parliamentary Affairs",
+"definition": "Covers the rules, procedures, conduct, and business of the House of Commons, including debates, question period, points of order, privilege, and legislative processes."
+},
+{
+"name": "Public Finance and Taxation",
+"definition": "Concerns government fiscal policy, including the budget, taxation (e.g., GST), government spending, deficits, and the national debt."
+},
+{
+"name": "Economic Management",
+"definition": "Relates to broad economic policy, including inflation, interest rates, monetary policy, economic growth, and the regulation of financial institutions."
+},
+{
+"name": "Social Policy",
+"definition": "Pertains to the social safety net and public services, including pensions, health, education, housing, family benefits, and welfare programs."
+},
+{
+"name": "Labour and Employment",
+"definition": "Focuses on unemployment, job creation programs, unemployment insurance, labour law, and working conditions."
+},
+{
+"name": "Justice and Rights",
+"definition": "Involves the legal system, criminal law (e.g., capital punishment), policing, civil liberties, and the Charter of Rights and Freedoms."
+},
+{
+"name": "Constitutional and Intergovernmental Relations",
+"definition": "Deals with the constitution, federal-provincial relations, national unity debates, equalization, and institutional reform like the Senate."
+},
+{
+"name": "International Trade",
+"definition": "Covers bilateral and multilateral trade agreements, tariffs, and trade disputes, with a focus on topics like the Canada-U.S. Free Trade Agreement."
+},
+{
+"name": "Foreign Affairs and Defence",
+"definition": "Encompasses diplomacy, international relations, national security, the armed forces, peacekeeping, and foreign aid."
+},
+{
+"name": "Agriculture and Fisheries",
+"definition": "Focuses on policies specific to the farming and fishing sectors, including subsidies, marketing boards, transportation of agricultural products, and credit."
+},
+{
+"name": "Energy and Natural Resources",
+"definition": "Relates to policies governing energy sectors (oil, gas, nuclear), forestry, mining, and environmental protection related to resource extraction."
+},
+{
+"name": "Transportation and Communications",
+"definition": "Pertains to national infrastructure and services, including railways, airlines, postal services, broadcasting, and telecommunications."
+},
+{
+"name": "Government Operations",
+"definition": "Concerns the administration of government, including the public service, Crown corporations, accountability, conflict of interest, and electoral processes."
+},
+{
+"name": "Indigenous Affairs",
+"definition": "Covers policies, legislation, land claims, self-government, and relations concerning First Nations, Inuit, and Métis peoples."
+}
+],
+"natural_rationale": "A 14-category model was chosen because the 10-category scheme combines several large, distinct policy domains into overly broad categories. This model more naturally separates Public Finance from general Economic Management; distinguishes Labour/Employment from other Social Policy; and splits the heterogeneous 'Industry' category into more coherent sectors: Agriculture/Fisheries, Energy/Resources, and Transportation/Communications. It also creates a dedicated category for International Trade, reflecting its high frequency and singular importance in the debates of this era."
+}

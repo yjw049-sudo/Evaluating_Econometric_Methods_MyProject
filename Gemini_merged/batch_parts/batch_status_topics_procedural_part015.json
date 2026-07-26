@@ -1,0 +1,23 @@
+{
+  "name": "batches/bxra9hscmkgohhg1opmzs4begsak0z7ol29i",
+  "display_name": "topics-procedural-score-part015",
+  "state": "JOB_STATE_SUCCEEDED",
+  "error": null,
+  "create_time": "2026-07-22T06:36:59.799335+00:00",
+  "start_time": null,
+  "end_time": "2026-07-22T06:38:53.973489+00:00",
+  "update_time": "2026-07-22T06:38:53.973489+00:00",
+  "model": "models/gemini-2.5-flash-lite",
+  "src": null,
+  "dest": {
+    "format": null,
+    "gcs_uri": null,
+    "bigquery_uri": null,
+    "file_name": "files/batch-bxra9hscmkgohhg1opmzs4begsak0z7ol29i",
+    "inlined_responses": null,
+    "inlined_embed_content_responses": null,
+    "vertex_dataset": null
+  },
+  "completion_stats": null,
+  "output_info": null
+}
