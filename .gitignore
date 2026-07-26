@@ -16,7 +16,8 @@ work_1953_1993/output/yearly_three_indicators/
 work_1953_1993/output/temp_pic/
 work_1953_1993/temp.ipynb
 others
-output
+output\*
+!output\pic
 Gemini
 essay
 草稿_论文框架重写版.md
