@@ -74,6 +74,7 @@
 4. `src\pic_main.py`
 5. `src\pic_classification.py`
 6. `src\pic_LLM.py`
+7. `src\pic_position.py`
 
 ## Descriptive
 `src\speech_descriptive.py`
