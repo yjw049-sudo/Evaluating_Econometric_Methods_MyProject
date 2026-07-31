@@ -211,7 +211,7 @@ def plot_score_figure(summary: pd.DataFrame) -> None:
             alpha=0.2,
         )
         n_speeches = int(subset["n_speeches"].max())
-        axis.set_title(f"chunk_total = {chunk_total} (N={n_speeches:,})")
+        axis.set_title(f"The number of chunks per speech: {chunk_total}")
         axis.set_xlim(0, 1)
         axis.set_ylim(0, y_max)
         axis.set_xticks([0, 0.25, 0.5, 0.75, 1.0])
@@ -249,7 +249,7 @@ def plot_category_figure(summary: pd.DataFrame) -> None:
             alpha=0.2,
         )
         n_speeches = int(subset["n_speeches"].max())
-        axis.set_title(f"chunk_total = {chunk_total} (N={n_speeches:,})")
+        axis.set_title(f"The number of chunks per speech: {chunk_total}")
         axis.set_xlim(0, 1)
         axis.set_ylim(0, 1)
         axis.set_xticks([0, 0.25, 0.5, 0.75, 1.0])

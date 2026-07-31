@@ -22,6 +22,7 @@ SCRIPTS = [
     ROOT / "src" / "pic_main.py",
     ROOT / "src" / "pic_classification.py",
     ROOT / "src" / "pic_LLM.py",
+    ROOT / "src" / "pic_position.py",
     ROOT / "src" / "speech_descriptive.py"
 ]
 
